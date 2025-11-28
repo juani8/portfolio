@@ -1,0 +1,283 @@
+Las personas con discapacidad visual enfrentan múltiples desafíos que comprometen su seguridad y autonomía al desplazarse por entornos urbanos. Obstáculos cotidianos como veredas rotas, peatones inesperados o la imposibilidad de identificar qué colectivo se aproxima a una parada dificultan su movilidad independiente y las obliga, en muchos casos, a depender de la ayuda de terceros. Esta problemática no se limita únicamente a una cuestión de accesibilidad física, sino que también refleja profundas desigualdades sociales, económicas y culturales que afectan el ejercicio pleno de los derechos ciudadanos. En este contexto, repensar los entornos urbanos y tecnológicos desde una perspectiva inclusiva se vuelve esencial para garantizar la libre circulación y la participación activa de todas las personas en la vida urbana. 
+
+Objetivo 
+
+Desarrollar una aplicación móvil para Android que utilice inteligencia artificial para asistir a personas con discapacidad visual en el Área Metropolitana de Buenos Aires (AMBA) durante el año 2025, permitiendo la detección en tiempo real de dos obstáculos presentes en la vía pública y la identificación visual de tres líneas de colectivos mediante la cámara del celular mientras se desplazan de manera autónoma. 
+
+Para cumplir con este objetivo se plantean como objetivos específicos: 
+
+Relevar, junto a personas con discapacidad visual, los obstáculos más críticos y las necesidades asociadas al uso del transporte público. 
+
+Implementar un módulo de detección en tiempo real de dos elementos presentes en la vía pública relevantes para el usuario, utilizando la cámara trasera del celular y emitiendo alertas auditivas. 
+
+Diseñar y entrenar un modelo de detección visual para identificar frentes de tres líneas de colectivos en tiempo real. 
+
+Diseñar e implementar una interfaz de usuario accesible, adaptada a las necesidades específicas de personas con discapacidad visual, priorizando la simplicidad de interacción y la retroalimentación auditiva clara a través del lector de pantalla del dispositivo móvil. 
+
+Alcance 
+
+El presente Proyecto Final de Ingeniería abarca el desarrollo de una aplicación móvil para dispositivos Android destinada a personas con discapacidad visual, con el fin de asistirlas durante sus desplazamientos cotidianos por el Área Metropolitana de Buenos Aires (AMBA). 
+
+Dentro del alcance de esta primera versión (Release 1), se incluye un módulo de detección de elementos del entorno que permite identificar, en tiempo real, dos tipos de obstáculos seleccionados en base a los resultados de la investigación con usuarios. Al detectar estos elementos, la aplicación genera señales auditivas para alertar a la persona usuaria. Asimismo, se desarrolla un sistema de reconocimiento visual de colectivos que permite identificar sus frentes y distinguir distintas líneas en función de sus características visuales como color, forma y texto. Esta funcionalidad se limita a una muestra acotada de tres líneas del AMBA, seleccionadas según criterios definidos en la etapa de investigación. 
+
+La aplicación requiere que el teléfono esté ubicado apuntando hacia el frente del usuario mediante un accesorio corporal de uso cotidiano, aunque el diseño de dicho soporte no es parte del presente proyecto. Además, el sistema está diseñado para utilizarse con un solo auricular, permitiendo al usuario recibir las alertas sin perder percepción auditiva del entorno urbano. La aplicación funciona en primer plano, lo que garantiza una interacción continua y directa con el sistema durante su uso. 
+
+Competencia
+El análisis comparativo de soluciones existentes (Figura 3) revela que la solución propuesta en este proyecto, llamada “SensAI”, se posiciona como una propuesta integral, específica y diferencial dentro del ecosistema de herramientas tecnológicas orientadas a la movilidad urbana de personas con discapacidad visual. 
+
+En primer lugar, SensAI se diferencia por su operatividad exclusiva mediante teléfono celular, sin necesidad de hardware adicional como bastones electrónicos o anteojos inteligentes, lo que reduce significativamente los costos de adopción en comparación con dispositivos como Ray-Ban Meta, OrCam MyEye o WeWALK. 
+
+Además, mientras que muchas soluciones actuales como Moovit, Google Gemini o Ray-Ban Meta han incorporado funcionalidades accesibles, SensAI fue concebida desde su origen para personas con discapacidad visual, abordando sus necesidades reales y recurrentes a partir de un diseño centrado en la experiencia de este grupo de usuarios. 
+
+A nivel funcional, SensAI está orientada a entornos urbanos dinámicos, con foco específico en la región del AMBA, donde los desafíos de movilidad se intensifican. Competidores como WeWALK, Moovit y Cuándo SUBO también abordan la movilidad urbana al brindar información sobre el transporte público. 
+
+En cuanto a la capacidad de detección automática de personas en tiempo real, solo Google Lookout ofrece una funcionalidad comparable. En contraste, soluciones como WeWALK solo advierten obstáculos sin distinguir su naturaleza, lo que limita su utilidad en contextos con presencia humana frecuente. 
+
+Un diferencial crítico de SensAI es que es la única solución que permite la detección automática de veredas en mal estado, uno de los obstáculos urbanos más reportados por personas con discapacidad visual en el AMBA y cuya ausencia en otras herramientas representa una barrera no resuelta. 
+
+Por último, la identificación visual automática y en tiempo real de líneas de colectivos representa una funcionalidad exclusiva de SensAI, ausente en todas las soluciones analizadas. Esta capacidad no solo disminuye la dependencia de terceros al momento de abordar un colectivo, sino que aumenta significativamente la autonomía del usuario en situaciones de movilidad cotidiana. Si bien aplicaciones como WeWALK, Cuándo SUBO y Moovit ofrecen seguimiento por GPS, no garantizan que el usuario pueda identificar cuál colectivo ha llegado cuando varias líneas coinciden en una misma parada. Por su parte, OrCam MyEye podría cumplir parcialmente esta función mediante su sistema OCR de lectura de texto, pero en entornos urbanos saturados de información visual, no existe garantía de que el dispositivo identifique correctamente el número del colectivo entre múltiples elementos textuales presentes en la escena. 
+
+Es por esto que SensAI se presenta como la única solución que combina detección automática y en tiempo real de personas, veredas rotas y colectivos, con un diseño accesible, sin hardware adicional y específicamente adaptado al entorno urbano, cubriendo vacíos críticos que las demás soluciones del mercado aún no han resuelto. 
+
+
+USer research
+A partir del análisis cualitativo de las siete entrevistas realizadas a personas con distintos grados de discapacidad visual, se obtuvieron insumos clave para la validación de la propuesta. 
+
+En primer lugar, se observa que todas las personas entrevistadas salen solas a la calle, lo que confirma que existe un alto grado de autonomía y disposición a desplazarse de manera independiente. Asimismo, todas llevan consigo un teléfono celular durante sus trayectos, lo que respalda la viabilidad de desarrollar una solución móvil basada en el uso del dispositivo que ya portan habitualmente. 
+
+En cuanto a la movilidad urbana, se advierte que las personas que utilizan perro guía se desplazan con mayor rapidez que aquellas que emplean bastón, ya que el animal esquiva obstáculos automáticamente, sin necesidad de que la persona los detecte manualmente. Sin embargo, el perro guía no es accesible para todas las personas con discapacidad visual, y el bastón continúa siendo el apoyo más utilizado. En este sentido, la propuesta de una aplicación que permita anticipar la presencia de obstáculos mediante alertas auditivas podría aumentar la fluidez del desplazamiento con bastón, generando una experiencia de movilidad más dinámica y segura. 
+
+Respecto al uso del transporte público, la mayoría de los entrevistados utilizan colectivos y mencionan que actualmente dependen de otras personas para identificar el colectivo correcto o deben detener cada unidad para preguntar al chofer. Esto no solo genera incomodidad, sino que enlentece el desplazamiento y expone a la persona a situaciones de vulnerabilidad. La implementación de un sistema de identificación visual de colectivos mediante la cámara del celular permitiría eliminar esta barrera, evitando tener que frenar todos los vehículos y agilizando la espera en paradas con múltiples líneas. 
+
+Otro hallazgo relevante es que las personas con baja visión (aquellas con agudeza visual entre 6/18 y 6/60), en general, no considerarían útil esta aplicación, ya que conservan un nivel de visión suficiente para detectar obstáculos y reconocer colectivos por sí mismas. En cambio, las personas con ceguera económica, manifiesta o absoluta, manifestaron una alta utilidad esperada de la solución propuesta, tanto para la detección de obstáculos como para la identificación de transporte público. 
+
+Por último, al indagar sobre los obstáculos que más frecuentemente enfrentan al caminar por la vía pública, la mayoría mencionó personas detenidas o en movimiento, y veredas en mal estado. Estos dos elementos fueron los más repetidos entre todos los niveles de discapacidad visual, por lo que serán los objetos de detección a implementar en el módulo de visión artificial de la aplicación. 
+
+En conclusión, el relevamiento realizado permite afirmar que existe una necesidad concreta y generalizada entre personas con ceguera o muy baja visión de contar con una herramienta tecnológica que complemente el uso del bastón o perro guía. La propuesta de este proyecto responde a esas necesidades y se apoya en las prácticas actuales de las personas entrevistadas, quienes ya utilizan el celular como parte de su rutina diaria de movilidad. 
+
+Descripción 
+
+Demostrada la necesidad de una herramienta integral para potenciar la autonomía de personas con discapacidad visual en el AMBA, se desarrolla una aplicación móvil que procesa en tiempo real las imágenes capturadas por la cámara trasera del dispositivo y emite alertas auditivas sobre obstáculos urbanos y frentes de colectivo, mejorando la seguridad y la independencia del usuario. 
+
+Requerimientos 
+
+Los requerimientos funcionales (RF) están enfocados en definir el “qué” debe hacer el sistema o software, es decir, las funciones específicas que este debe ofrecer (Metodologías Ágiles, 2025). 
+
+En contraste, los requerimientos no funcionales (RNF) se centran en el “cómo” debe comportarse el sistema. Estos abarcan aspectos relacionados con la calidad del servicio, el rendimiento y la experiencia del usuario. Aunque no describen funcionalidades propiamente dichas, son fundamentales para garantizar la satisfacción del usuario y la eficacia del sistema (Metodologías Ágiles, 2025). 
+
+A continuación, se definirán los requerimientos funcionales y no funcionales asociados al producto planteado. 
+
+Requerimientos Funcionales 
+
+RF001: El sistema debe analizar continuamente mediante la cámara del dispositivo móvil el entorno del usuario. 
+
+RF002: El sistema debe detectar humanos que se encuentren enfrente y cercanos a la posición del usuario. 
+
+RF003: El sistema debe emitir alertas auditivas que le permitan al usuario percibir con claridad la presencia de humanos cercanos y frente a su posición.  
+
+RF004: El sistema debe detectar veredas rotas que se encuentren enfrente y cercanas a la posición del usuario. 
+
+RF005: El sistema debe emitir alertas auditivas que le permitan al usuario percibir con claridad la presencia de veredas rotas cercanas y frente a su posición. 
+
+RF006: El sistema debe permitir pausar y reanudar el modo de detección de obstáculos. 
+
+RF007: El sistema debe permitir activar y desactivar el modo de espera de colectivos. 
+
+RF008: El sistema debe poder identificar la línea del colectivo que se acerca de frente al usuario. 
+
+RF009: El sistema debe ofrecer la capacidad de limitar las líneas / empresas de colectivos sobre las cuales alertar al usuario. 
+
+Requerimientos No Funcionales 
+
+RNF001: El sistema está disponible en todo momento para que los usuarios puedan utilizarlo en la detección de obstáculos y la identificación de colectivos. 
+
+RNF002: El sistema debe informar de las detecciones en tiempo real. 
+
+RNF003: El sistema debe estar desarrollado de una forma modular que permita la escalabilidad horizontal de funcionalidades. 
+
+RNF004: El sistema debe ofrecer un tutorial al abrir la aplicación que describa cómo operar con cada funcionalidad ofrecida. 
+
+RNF005: El sistema debe contar con etiquetas accesibles con TalkBack sobre las funcionalidades que ofrece. 
+
+RNF006: El sistema debe funcionar en dispositivos Android 8 en adelante. 
+
+RNF007: El sistema debe ofrecer modos claro, oscuro, y de alto contraste para incluir usuarios con diversos tipos de baja visión. 
+
+RNF008: El sistema debe permitir ajustes del tamaño de tipografía. 
+
+RNF009: El sistema debe estar disponible para su uso sin necesidad de conexión a internet. 
+
+
+El proceso de inferencia dentro de la aplicación 
+
+En el primer diagrama, se representa el flujo que siguen los datos durante el uso de los modelos de detección. 
+
+ 
+
+ 
+
+Figura 14: Proceso de inferencia en la aplicación Android – preprocesamiento, inferencia con modelo ONNX y posprocesamiento (Elaboración propia) 
+ 
+
+La fase de preprocesamiento comienza con la captura del entorno desde la cámara y finaliza con las etapas de redimensionamiento, normalización y tensorización para que los frames de video sean compatibles con los modelos.  
+
+El siguiente proceso corresponde a la inferencia, etapa en la cual el modelo exportado a ONNX recibe como entrada las imágenes preprocesadas y genera predicciones en forma de valores numéricos. Estos valores son decodificados para obtener las coordenadas de las cajas delimitadoras que representan las detecciones. Se continúa aplicando un filtrado por nivel de confianza, descartando aquellas predicciones cuya probabilidad se encuentra por debajo de un cierto umbral. Finalmente, se implementa el algoritmo de supresión no máxima (NMS), con el objetivo de eliminar solapamientos.  
+
+Finalmente, en el proceso de posprocesamiento, los resultados se transforman nuevamente a las dimensiones originales y se enriquecen con la incorporación de contadores y alertas accesibles para el usuario.  
+
+ 
+
+ 
+
+Figura 15: Demostración de detección por medio de cajas delimitadoras, mostrando la clase detectada junto a su confianza para el modelo de detección de peatones (Elaboración propia) 
+
+ 
+
+Figura 16: Demostración de detección por medio de cajas delimitadoras, mostrando la clase detectada junto a su confianza para el modelo de detección de daños en veredas (Elaboración propia) 
+
+ 
+
+Figura 17: Demostración de detección por medio de cajas delimitadoras, mostrando la clase detectada junto a su confianza para el modelo de detección de líneas de colectivos (Elaboración propia) 
+ 
+
+Proceso ETL del entrenamiento de los modelos 
+
+En el segundo diagrama, se ilustra el proceso de extracción, transformación y carga aplicado al entrenamiento de aprendizaje automático. 
+
+ 
+
+ 
+
+Figura 18: Proceso ETL para el entrenamiento de modelos – extracción, transformación y carga de datos (Elaboración propia) 
+
+El primer proceso, de extracción, se centra en la recolección de imágenes desde distintas fuentes, tanto propias como públicas. 
+
+En el siguiente proceso, de transformación, se lleva a cabo la preparación del set de datos, lo que incluye el etiquetado manual con herramientas como Label Studio, la definición de clases y la generación de particiones de entrenamiento, validación y prueba.  
+
+En el último proceso, de carga, los datos transformados se emplean para el entrenamiento de los modelos. En esta etapa, se ajustan los hiperparámetros y se aplican técnicas de aumentación que mejoran la capacidad de generalización de los modelos. Esta fase se desarrolla de manera iterativa, repitiéndose las fases de entrenamiento y validación hasta alcanzar un nivel de rendimiento considerado satisfactorio. Una vez esto ocurre, los modelos resultantes del entrenamiento son exportados al formato ONNX, a los que, por último, se les incorpora la operación de supresión de no máximos (NMS), con el objetivo de simplificar el pipeline de inferencia en la aplicación móvil.  
+
+Algoritmo de aprendizaje automático 
+
+El desarrollo del sistema de detección de obstáculos y colectivos en SensAI se sustenta en el uso de algoritmos de aprendizaje automático, particularmente en modelos de visión por computadora de la familia YOLO. Esta sección describe el proceso completo que permitió entrenar y optimizar dichos modelos, desde la confección del set de datos hasta la preparación del entrenamiento y la posterior optimización para dispositivos móviles. 
+
+Confección del set de datos 
+
+La calidad y representatividad de los datos constituyen un factor determinante en el rendimiento de cualquier modelo de aprendizaje automático. Por ello, en esta etapa se detalla cómo se construyeron los diferentes conjuntos de datos que alimentan a los modelos de SensAI, abarcando la recolección de imágenes, su preparación y partición en subconjuntos para entrenamiento, validación y prueba. 
+
+Recolección de imágenes 
+
+Tomando como premisa que la calidad de los datos de entrenamiento resulta un factor determinante en el desempeño de cualquier modelo de aprendizaje automático, en este proyecto, la estrategia de recolección se diseñó de manera diferenciada según el tipo de entidad a detectar (veredas con daños, colectivos y peatones), teniendo en cuenta tanto la disponibilidad de fuentes como la necesidad de representar adecuadamente las diversas entidades en el entorno urbano del AMBA. 
+
+Veredas y obstáculos 
+
+En el caso de las veredas, se construyó un set de datos propio a partir de capturas fotográficas tomadas en distintas zonas del Área Metropolitana de Buenos Aires. La recolección se realizó en diferentes condiciones de iluminación y climáticas con el fin de abarcar la mayor cantidad de escenarios reales posibles. En total se obtuvieron aproximadamente 500 imágenes, etiquetadas en una única clase denominada, que incluye situaciones como baldosas levantadas, faltantes o desniveles entre suelos. Este criterio de consolidar múltiples tipos de irregularidad en una única clase respondió a la necesidad de simplificar la tarea de detección para un uso práctico en la aplicación, siendo que no aporta valor al usuario final saber qué tipo de daño es el que tiene en frente, lo que aporta valor es ser alertado de que existe un defecto en el suelo. 
+
+Colectivos 
+
+El set de datos correspondiente a colectivos se conformó mediante la recopilación de imágenes públicas disponibles en la web y la extracción de capturas a partir de frames de video, incluyendo así una amplia diversidad de ángulos de captura, incluyendo tanto tomas frontales como levemente laterales, enfocando claramente el frente de los colectivos, el objeto de estudio. El conjunto resultante se organizó en múltiples clases en función de la línea de colectivo, incluyendo entre 125 y 400 imágenes por cada línea de colectivo. 
+
+Personas 
+
+En el caso de peatones, se integran fuentes públicas de set de datos existentes. El set de datos fue depurado para asegurar consistencia en la calidad de las imágenes y que se incluyan únicamente el tipo de entidades necesarias para el caso de uso, siendo que las detecciones deben darse en caso de que la persona se encuentre próxima y pueda ser considerada un obstáculo para el usuario final. De esta forma, el set de datos resultante incluye aproximadamente 800 imágenes, muchas de ellas con múltiples personas, y organizado bajo una única clase ya que, nuevamente, al usuario le interesara saber únicamente que se encuentra una persona próxima. 
+
+Preparación de imágenes  
+
+En este proyecto se trabaja con tres datasets independientes, correspondientes a los dominios de veredas, personas y colectivos, ya que se entrenan tres modelos distintos, con sus propias clases y configuraciones. 
+
+El proceso de rotulado de imágenes es la etapa en la que se indica, para cada imagen, lo que se desea que el algoritmo de aprendizaje automático aprecie en la etapa de entrenamiento y de esta manera formar un conocimiento. Esta etapa se realiza con la herramienta Label Studio, que permite anotar manualmente las imágenes y exportar los resultados en formatos compatibles con YOLO. Cada caja delimitadora indicada en una imagen se asocia con la clase correspondiente a su dominio, y posteriormente se llevan a cabo revisiones para corregir inconsistencias y garantizar la coherencia del set de datos. 
+
+Distribución y partición de set de datos 
+
+Para los tres conjuntos de datos se aplicó un criterio uniforme de partición en subconjuntos de entrenamiento, validación y prueba, siguiendo una proporción de 80/10/10. Esto significa que, de cada 100 imágenes, 80 se destinaran al conjunto de entrenamiento, 10 al de validación, y 10 al de pruebas. 
+
+Preparación del entrenamiento del modelo 
+
+La configuración de los hiperparámetros y de las técnicas de aumentación de datos en el proceso de entrenamiento del modelo resulta de gran importancia para poder sacar el máximo provecho del set de datos y poder obtener un modelo con las mejores métricas y rendimiento posible. Además, una mala configuración de los parámetros de entrenamiento puede desembocar en los fenómenos de underfitting y overfitting. A continuación, se describirán las parametrizaciones que mejores resultados han obtenido en el entrenamiento de los modelos. 
+
+Modelo de veredas 
+
+En el modelo de detección de defectos sobre veredas, conformado por aproximadamente 500 imágenes, para la clase “daño en vereda”, caracterizada por una gran variabilidad intra-clase (baldosas levantadas, faltantes, desniveles), se estableció un entrenamiento prolongado con 200 épocas, para prolongar el tiempo y mejorar la convergencia sin sobreajuste. se configuro 40 de paciencia para que, en caso de que el modelo no muestre mejoras de métricas a lo largo de 40 épocas, el entrenamiento concluya. Se fijó un tamaño de lote de 16 y resolución 640×640, tamaños manejables para entrenar sin perder diversidad en cada iteración. En cuanto a aumentación, se aplican cambios fotométricos fuertes en cuestiones de iluminación y saturación, así como transformaciones geométricas moderadas para simular la existencia de una mayor cantidad de escenarios en el dataset. 
+
+Modelo de peatones 
+
+En el modelo de detección de peatones, conformado por aproximadamente 800 imágenes de personas, se optó por 120 épocas y 25 de paciencia, con un tamaño de lote de 16 y resolución 640×640, dimensiones manejables para entrenar sin perder diversidad en cada iteración. La aumentación se centró en variaciones de iluminación urbana, traslaciones y escalados leves, y un uso moderado de mosaic, buscando robustez sin distorsionar las siluetas. 
+
+Modelo de colectivos 
+
+Para el dataset de colectivos, conformado por aproximadamente 300 imágenes, se exigía un entrenamiento más controlado, dado el tamaño reducido y el hecho que el patrón a detectar es más rígido (frente de los colectivos). Se definieron 150 épocas con 30 de paciencia, un tamaño de lote de 16, y resolución 640×640, dimensiones manejables para entrenar sin perder diversidad en cada iteración. Las aumentaciones geométricas fueron más suaves, consistiendo en rotaciones, escalados y perspectiva reducidos para no desestructurar la morfología del frente. 
+
+
+Elección de los lenguajes de programación 
+
+En cuanto al desarrollo, el foco está en entornos móviles. Se utiliza Android Studio como entorno principal y Kotlin como lenguaje de programación debido a su buena compatibilidad con modelos de visión computacional. Además, Android se caracteriza por su flexibilidad para configurar aspectos del sistema operativo, como el acceso a la cámara, o las opciones de accesibilidad. Esto permite que la aplicación se adapte mejor a las necesidades de los usuarios. 
+
+Identidad de Marca 
+
+La construcción de una identidad de marca sólida es fundamental para garantizar coherencia, reconocimiento y confianza en los usuarios. En el caso de SensAI, la definición del nombre, la paleta cromática, la tipografía y el logotipo busca transmitir no solo la esencia tecnológica del proyecto, sino también sus valores de accesibilidad, inclusión y apoyo a la autonomía de las personas con discapacidad visual. Esta sección constituye, por lo tanto, el manual básico de identidad que orienta todas las futuras representaciones visuales y comunicacionales de la aplicación. 
+
+Misión 
+
+SensAI busca mejorar la movilidad y autonomía de las personas con discapacidad visual mediante el uso de inteligencia artificial para la detección del entorno urbano a través de una herramienta accesible, segura y confiable. 
+
+ 
+
+Visión 
+
+Ser referentes en accesibilidad urbana inteligente, impulsando el desarrollo de ciudades más inclusivas y seguras a través de la aplicación ética de la inteligencia artificial y la tecnología al servicio del bienestar social. 
+
+Nombre 
+
+El nombre SensAI surge de la combinación entre “sensei”, término japonés que significa maestro o guía, y “AI”, sigla en inglés de Artificial Intelligence. De esta manera, el nombre sintetiza la propuesta de valor de la aplicación: un “maestro de los sentidos” que, a través de inteligencia artificial, acompaña y potencia la percepción de los usuarios en su vida cotidiana. El término refleja cercanía, apoyo y confianza, atributos fundamentales para una herramienta diseñada para la movilidad autónoma. 
+
+Paleta de Colores 
+
+La identidad visual de SensAI se sostiene en una paleta cromática que busca transmitir confianza, innovación y accesibilidad: 
+
+ 
+
+Figura 19: Paleta de colores de SensAI (Elaboración propia) 
+ 
+
+Color principal para modo claro: #0a4f53 (verde azulado profundo). Representa serenidad, confianza y seguridad, valores esenciales para los usuarios. 
+
+Color principal para modo oscuro: #0097b2 (turquesa brillante). Comunica modernidad, dinamismo y tecnología, manteniendo legibilidad en entornos oscuros. 
+
+Color secundario modo claro: blanco #FFFFFF, utilizado para fondos, aporta limpieza, claridad y contraste. 
+
+Color secundario modo oscuro: casi negro #120f14. Refuerza la sobriedad y permite destacar los elementos principales sin perder legibilidad. 
+
+Color de apoyo: gris #808080, aplicado a botones y detalles secundarios, brinda equilibrio y evita la sobrecarga visual. 
+
+ 
+
+Asimismo, se contemplan variantes de alto contraste para mejorar la accesibilidad: 
+
+En modo claro, el texto se presenta en negro #000000, mientras que en la versión de alto contraste el fondo se reemplaza por amarillo #FFD600. 
+
+En modo oscuro, el fondo en alto contraste es negro #000000, con textos en amarillo #FFD600, garantizando máxima visibilidad y legibilidad en entornos de baja iluminación. 
+
+ 
+
+La coherencia en el uso de estos colores asegura una experiencia accesible, de alto contraste y amigable con usuarios con baja visión. 
+
+ 
+
+Tipografía 
+
+La tipografía seleccionada es Atkinson Hyperlegible, desarrollada por el Braille Institute y diseñada para maximizar la legibilidad en usuarios con baja visión. Entre las cualidades que mejoran su legibilidad se destacan el mayor espaciado entre letras, la diferenciación visual clara entre caracteres similares (como “1” y “l”, o “0” y “O”), y un diseño que se adapta mejor a pantallas pequeñas gracias a su tamaño y proporción más accesibles (Braille Institute, 2020). 
+
+Feedback multimodal 
+
+Para reforzar la accesibilidad, SensAI combina múltiples canales de retroalimentación: 
+
+Visual: cambios en el borde/relleno de los tiles de activación ON/OFF. 
+
+Auditiva: mensajes de voz breves como “Peatón detectado”. 
+
+Háptica: patrones de vibración para obstáculos y colectivos. 
+
+Compatibilidad con Talkback 
+
+SensAI está diseñada pensando en personas que utilizan lectores de pantalla como TalkBack. Para lograrlo, se garantiza que cada botón o sección relevante cuente con una descripción clara que pueda ser leída en voz alta. Los títulos están marcados como encabezados para facilitar la navegación, y todos los elementos interactivos pueden enfocarse fácilmente, explicando su función y propósito de manera comprensible. 
+
+La aplicación mantiene un comportamiento predecible: cada ítem tiene un nombre claro, la estructura visual se respeta con un recorrido lineal, y los cambios importantes en la pantalla se anuncian automáticamente. También se prestó especial atención a detalles como el tamaño de los botones, asegurando áreas de contacto amplias y fáciles de encontrar. Además, se trabajó en diseñar las secciones de forma modular, evitando agrupar demasiadas opciones en una misma vista para no sobrecargar la navegación. 
