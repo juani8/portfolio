@@ -89,7 +89,7 @@ export const PERSONAL_INFO: PersonalInfo = {
     es: 'Estudiante de Ingeniería en Informática con experiencia en programación, análisis de datos, cloud computing y ciberseguridad. Reconocido por mi capacidad de aprendizaje rápido, adaptabilidad y trabajo en equipo. Busco contribuir a proyectos de desarrollo de software, seguridad informática y datos aplicando conocimientos técnicos en Python, SQL, AWS y Machine Learning.',
     en: 'Computer Engineering student with experience in programming, data analysis, cloud computing, and cybersecurity. Recognized for fast learning ability, adaptability, and teamwork. Seeking to contribute to software development, information security, and data projects by applying technical knowledge in Python, SQL, AWS, and Machine Learning.'
   },
-  avatar: 'assets/images/avatar.png',
+  avatar: 'assets/images/avatar.webp',
   email: 'juanisosa442@gmail.com',
   location: {
     es: 'Buenos Aires, Argentina',
@@ -214,21 +214,19 @@ export const CERTIFICATIONS: Certification[] = [
 // ============================================
 
 export const SKILLS: Skill[] = [
-  // Lenguajes
-  { name: 'Python', category: 'language', level: 5 },
-  { name: 'SQL', category: 'language', level: 5 },
-  { name: 'Java', category: 'language', level: 4 },
-  { name: 'JavaScript', category: 'language', level: 4 },
-  { name: 'TypeScript', category: 'language', level: 3 },
+  // Tools
+  { name: 'Python', category: 'language', level: 4 },
+  { name: 'SQL', category: 'language', level: 4 },
+  { name: 'Java', category: 'language', level: 3 },
+  { name: 'JavaScript / TypeScript', category: 'language', level: 3.5 },
   { name: 'Kotlin', category: 'language', level: 3 },
   
-  // ML & Data Science
-  { name: 'Object Detection', category: 'framework', level: 4 },
-  { name: 'TensorFlow / Keras', category: 'framework', level: 3 },
-  { name: 'OpenCV', category: 'framework', level: 3 },
-  { name: 'Pandas / NumPy', category: 'framework', level: 3 },
-  
-  // Frameworks & Libraries
+  // Expertise
+  { name: 'Machine Learning', category: 'framework', level: 4.25 },
+  { name: 'Virtualization', category: 'framework', level: 3 },
+  { name: 'ETL', category: 'framework', level: 3.5 },
+  { name: 'Cloud Computing', category: 'framework', level: 3.75 },
+  { name: 'Information Security', category: 'framework', level: 4.25 },
   { name: 'Front-End (React, React Native, Angular)', category: 'framework', level: 4 },
   { name: 'Back-End (Node.js, Spring Boot)', category: 'framework', level: 4 },
   

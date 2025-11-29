@@ -19,7 +19,7 @@ import {
         <!-- Section Header -->
         <div class="section-header">
           <h1 class="section-title">{{ t.t('about.title') }}</h1>
-          <p class="section-subtitle">{{ t.t('about.intro') }}</p>
+          <p class="section-subtitle" [innerHTML]="t.t('about.intro')"></p>
         </div>
 
         <!-- Main Content Grid -->
@@ -144,7 +144,7 @@ import {
           <div class="skills-grid">
             <!-- Languages -->
             <div class="skill-category">
-              <h3 class="skill-category-title">Lenguajes</h3>
+              <h3 class="skill-category-title">Languages</h3>
               <div class="skill-bars">
                 @for (skill of languageSkills; track skill.name) {
                   <div class="skill-bar-item">
@@ -160,9 +160,9 @@ import {
               </div>
             </div>
 
-            <!-- Frameworks -->
+            <!-- Expertise -->
             <div class="skill-category">
-              <h3 class="skill-category-title">Frameworks</h3>
+              <h3 class="skill-category-title">Expertise</h3>
               <div class="skill-bars">
                 @for (skill of frameworkSkills; track skill.name) {
                   <div class="skill-bar-item">
@@ -178,26 +178,34 @@ import {
               </div>
             </div>
 
-            <!-- Tools & Cloud -->
-            <div class="skill-category">
-              <h3 class="skill-category-title">Tools & Cloud</h3>
-              <div class="skill-tags">
-                @for (skill of toolSkills; track skill.name) {
-                  <span class="skill-tag">{{ skill.name }}</span>
-                }
-                @for (skill of cloudSkills; track skill.name) {
-                  <span class="skill-tag cloud">{{ skill.name }}</span>
-                }
-              </div>
-            </div>
-
-            <!-- Databases -->
-            <div class="skill-category">
-              <h3 class="skill-category-title">Databases</h3>
-              <div class="skill-tags">
-                @for (skill of databaseSkills; track skill.name) {
-                  <span class="skill-tag database">{{ skill.name }}</span>
-                }
+            <!-- DevOps & Infrastructure -->
+            <div class="skill-category full-width">
+              <h3 class="skill-category-title">DevOps & Infrastructure</h3>
+              <div class="skill-tags-grouped">
+                <div class="tag-group">
+                  <span class="tag-group-label">Tools</span>
+                  <div class="skill-tags">
+                    @for (skill of toolSkills; track skill.name) {
+                      <span class="skill-tag">{{ skill.name }}</span>
+                    }
+                  </div>
+                </div>
+                <div class="tag-group">
+                  <span class="tag-group-label">Cloud</span>
+                  <div class="skill-tags">
+                    @for (skill of cloudSkills; track skill.name) {
+                      <span class="skill-tag cloud">{{ skill.name }}</span>
+                    }
+                  </div>
+                </div>
+                <div class="tag-group">
+                  <span class="tag-group-label">Databases</span>
+                  <div class="skill-tags">
+                    @for (skill of databaseSkills; track skill.name) {
+                      <span class="skill-tag database">{{ skill.name }}</span>
+                    }
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -240,6 +248,11 @@ import {
       color: var(--color-text-secondary);
       font-size: 1.1rem;
       line-height: 1.7;
+      
+      ::ng-deep strong {
+        color: var(--color-accent-primary);
+        font-weight: 600;
+      }
     }
 
     .about-grid {
@@ -469,6 +482,10 @@ import {
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       padding: 1.5rem;
+      
+      &.full-width {
+        grid-column: 1 / -1;
+      }
     }
 
     .skill-category-title {
@@ -522,6 +539,26 @@ import {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+    }
+    
+    .skill-tags-grouped {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    
+    .tag-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .tag-group-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .skill-tag {

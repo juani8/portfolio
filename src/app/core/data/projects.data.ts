@@ -36,6 +36,11 @@ export interface Project {
     es: string;
     en: string;
   };
+  // Párrafo introductorio "vendedor" que aparece después de las tecnologías
+  introDescription?: {
+    es: string;
+    en: string;
+  };
   fullDescription: {
     es: string;
     en: string;
@@ -67,6 +72,7 @@ export interface Project {
     url: string;
     description?: { es: string; en: string };
     category?: string; // Flexible para cada proyecto: 'auth', 'social', 'profile', 'settings', 'landing', 'discovery', 'playlist', 'detail', 'search', etc.
+    format?: 'mobile' | 'landscape'; // Optional: override default format for specific videos
   }[];
   // Formato de video: 'mobile' (9:16) o 'desktop' (16:9)
   videoFormat?: 'mobile' | 'desktop';
@@ -103,6 +109,10 @@ export const PROJECTS: Project[] = [
     shortDescription: {
       es: 'Aplicación móvil de asistencia para personas con discapacidad visual mediante visión computacional e IA. Detecta peatones, veredas rotas y colectivos en tiempo real.',
       en: 'Mobile assistance app for visually impaired people using computer vision and AI. Detects pedestrians, broken sidewalks and buses in real-time.'
+    },
+    introDescription: {
+      es: `Este proyecto representa un **ciclo completo de desarrollo de Machine Learning**: desde la investigación con usuarios y recolección de datos en campo, hasta el entrenamiento de modelos personalizados y su despliegue en dispositivos móviles. Se construyeron **3 modelos de detección de objetos** entrenados con datasets propios (~2400 imágenes etiquetadas manualmente), optimizados para inferencia en tiempo real (~50ms por frame) sin conexión a internet.`,
+      en: `This project represents a **complete Machine Learning development cycle**: from user research and field data collection, to training custom models and deploying them on mobile devices. **3 object detection models** were built, trained with proprietary datasets (~2400 manually labeled images), optimized for real-time inference (~50ms per frame) without internet connection.`
     },
     fullDescription: {
       es: `SensAi es una aplicación Android que utiliza **Machine Learning y Visión por Computadora** para asistir a personas con discapacidad visual en el Área Metropolitana de Buenos Aires (AMBA). El nombre surge de la combinación entre "sensei" (maestro o guía en japonés) y "AI" (Inteligencia Artificial): un "maestro de los sentidos" que acompaña y potencia la percepción de los usuarios.
@@ -176,7 +186,7 @@ Semi-structured interviews were conducted with 7 people with varying degrees of 
     },
     technologies: ['Android', 'Kotlin', 'Python', 'YOLOv8', 'ONNX Runtime', 'TensorFlow', 'OpenCV', 'Label Studio', 'TalkBack', 'CameraX'],
     tags: ['Mobile', 'ML', 'Data'],
-    imageUrl: 'assets/images/sensai/modo_claro (1).png',
+    imageUrl: 'assets/images/sensai/modo_claro (1).webp',
     imageStyle: 'contain',
     videoUrl: '',
     codeUrl: 'https://github.com/juani8/sensai',
@@ -393,7 +403,7 @@ Allows visual identification of which bus arrived when multiple lines coincide a
 **Unique Proposition**
 Design centered on visual impairment from the start, not as a feature added later.`
         },
-        imageUrl: 'assets/images/sensai/sensai_competencia.png'
+        imageUrl: 'assets/images/sensai/sensai_competencia.webp'
       }
     ],
     diagrams: [
@@ -454,7 +464,8 @@ Design centered on visual impairment from the start, not as a feature added late
           es: 'Visualización de bounding boxes del modelo detectando colectivo 324', 
           en: 'Bounding box visualization of model detecting bus 324' 
         },
-        category: 'model'
+        category: 'model',
+        format: 'landscape'
       },
       {
         title: { es: 'Detección Peatones', en: 'Pedestrian Detection' },
@@ -463,7 +474,8 @@ Design centered on visual impairment from the start, not as a feature added late
           es: 'Visualización de bounding boxes del modelo detectando peatones', 
           en: 'Bounding box visualization of model detecting pedestrians' 
         },
-        category: 'model'
+        category: 'model',
+        format: 'landscape'
       },
       {
         title: { es: 'Detección Veredas', en: 'Sidewalk Detection' },
@@ -479,37 +491,37 @@ Design centered on visual impairment from the start, not as a feature added late
       {
         title: { es: 'Tema Claro', en: 'Light Theme' },
         images: [
-          { url: 'assets/images/sensai/tema_claro (0).jpg', caption: { es: 'Pantalla principal', en: 'Main screen' } },
-          { url: 'assets/images/sensai/tema_claro (2).jpg', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
-          { url: 'assets/images/sensai/tema_claro (6).jpg', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
-          { url: 'assets/images/sensai/tema_claro (5).jpg', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+          { url: 'assets/images/sensai/tema_claro (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_claro (2).webp', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_claro (6).webp', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_claro (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
         ]
       },
       {
         title: { es: 'Tema Oscuro', en: 'Dark Theme' },
         images: [
-          { url: 'assets/images/sensai/tema_oscuro (0).jpg', caption: { es: 'Pantalla principal', en: 'Main screen' } },
-          { url: 'assets/images/sensai/tema_oscuro (2).jpg', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
-          { url: 'assets/images/sensai/tema_oscuro (6).jpg', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
-          { url: 'assets/images/sensai/tema_oscuro (5).jpg', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+          { url: 'assets/images/sensai/tema_oscuro (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_oscuro (2).webp', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro (6).webp', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
         ]
       },
       {
         title: { es: 'Alto Contraste Claro', en: 'Light High Contrast' },
         images: [
-          { url: 'assets/images/sensai/tema_claro_alto_contraste (0).jpg', caption: { es: 'Pantalla principal', en: 'Main screen' } },
-          { url: 'assets/images/sensai/tema_claro_alto_contraste (2).jpg', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
-          { url: 'assets/images/sensai/tema_claro_alto_contraste (6).jpg', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
-          { url: 'assets/images/sensai/tema_claro_alto_contraste (5).jpg', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (2).webp', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (6).webp', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
         ]
       },
       {
         title: { es: 'Alto Contraste Oscuro', en: 'Dark High Contrast' },
         images: [
-          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (0).jpg', caption: { es: 'Pantalla principal', en: 'Main screen' } },
-          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (2).jpg', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
-          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (6).jpg', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
-          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (5).jpg', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (2).webp', caption: { es: 'Menú de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (6).webp', caption: { es: 'Menú de Configuración', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
         ]
       }
     ],
@@ -525,6 +537,10 @@ Design centered on visual impairment from the start, not as a feature added late
     shortDescription: {
       es: 'Red social móvil con autenticación biométrica, gamificación, temas dinámicos y soporte multilenguaje.',
       en: 'Mobile social network with biometric authentication, gamification, dynamic themes and multilingual support.'
+    },
+    introDescription: {
+      es: `Red social móvil completa con **arquitectura de seguridad robusta**: autenticación biométrica nativa, JWT con refresh tokens, Magic Links y protección contra ataques comunes. Incluye sistema de **gamificación** con XP, niveles y logros desbloqueables. Desarrollada en 8 meses con React Native y backend Node.js/MongoDB.`,
+      en: `Complete mobile social network with **robust security architecture**: native biometric authentication, JWT with refresh tokens, Magic Links and protection against common attacks. Includes **gamification system** with XP, levels and unlockable achievements. Developed in 8 months with React Native and Node.js/MongoDB backend.`
     },
     fullDescription: {
       es: `Tribe es una aplicación móvil tipo red social completa desarrollada con React Native, con un fuerte enfoque en seguridad. La app implementa múltiples capas de protección y mejores prácticas de la industria para garantizar la seguridad de los datos de los usuarios.
@@ -562,7 +578,7 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
     },
     technologies: ['React Native', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Vision Camera', 'AsyncStorage'],
     tags: ['Mobile', 'API', 'Security'],
-    imageUrl: 'assets/images/projects/tribe_logo.png',
+    imageUrl: 'assets/images/projects/tribe_logo.webp',
     imageStyle: 'contain',
     codeUrl: 'https://github.com/mrosariopresedo/Tribe',
     featured: false,
@@ -871,6 +887,10 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
       es: 'Plataforma web de descubrimiento cinematográfico con playlists personalizadas, trailers y sistema de recomendaciones.',
       en: 'Web platform for movie discovery with personalized playlists, trailers and recommendation system.'
     },
+    introDescription: {
+      es: `Plataforma web full-stack para descubrir qué ver cuando no sabés qué elegir. Integración completa con **The Movie Database API**, sistema de **playlists CRUD** con persistencia en MongoDB, y filtrado por plataformas de streaming (Netflix, Prime, Disney+). Interfaz moderna con animaciones fluidas y diseño responsive.`,
+      en: `Full-stack web platform to discover what to watch when you don't know what to choose. Full integration with **The Movie Database API**, **CRUD playlist system** with MongoDB persistence, and filtering by streaming platforms (Netflix, Prime, Disney+). Modern interface with smooth animations and responsive design.`
+    },
     fullDescription: {
       es: `MoodFlix es una plataforma diseñada para ayudarte a encontrar qué ver cuando no estás seguro. Desarrollada como proyecto de la materia Aplicaciones Interactivas en UADE.
 
@@ -907,7 +927,7 @@ UI with purple/pink gradients, smooth animations, responsive design and sound no
     },
     technologies: ['React', 'Vite', 'Tailwind CSS', 'Material UI', 'Node.js', 'Express', 'MongoDB', 'JWT', 'TMDB API', 'Axios'],
     tags: ['Web', 'API'],
-    imageUrl: 'assets/images/projects/moodflix_logo.png',
+    imageUrl: 'assets/images/projects/moodflix_logo.webp',
     imageStyle: 'contain',
     videoUrl: 'assets/videos/moodflix-demo.mp4',
     videoFormat: 'desktop',

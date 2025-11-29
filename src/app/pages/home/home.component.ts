@@ -16,11 +16,9 @@ import { PERSONAL_INFO, getTopSkills } from '../../core/data/profile.data';
           <h1 class="hero-name animate-fade-in-up" style="animation-delay: 0.1s">
             {{ personalInfo.name }}
           </h1>
-          <h2 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s">
-            {{ t.t('home.title') }}
+          <h2 class="hero-title animate-fade-in-up" style="animation-delay: 0.2s" [innerHTML]="t.t('home.title')">
           </h2>
-          <p class="hero-description animate-fade-in-up" style="animation-delay: 0.3s">
-            {{ t.t('home.description') }}
+          <p class="hero-description animate-fade-in-up" style="animation-delay: 0.3s" [innerHTML]="t.t('home.description')">
           </p>
 
           <!-- CTA Buttons -->
@@ -159,6 +157,14 @@ import { PERSONAL_INFO, getTopSkills } from '../../core/data/profile.data';
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1.5rem;
+      
+      ::ng-deep .highlight {
+        background: var(--color-accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+      }
     }
 
     .hero-description {
@@ -167,6 +173,11 @@ import { PERSONAL_INFO, getTopSkills } from '../../core/data/profile.data';
       line-height: 1.7;
       max-width: 540px;
       margin-bottom: 2rem;
+      
+      ::ng-deep strong {
+        color: var(--color-text-primary);
+        font-weight: 600;
+      }
     }
 
     .hero-cta {

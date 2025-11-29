@@ -93,7 +93,209 @@ import { getProjectById, Project } from '../../core/data/projects.data';
             </div>
           </section>
 
-          <!-- Full Description -->
+          <!-- Intro Description (short selling paragraph) -->
+          @if (project()!.introDescription) {
+            <section class="content-section intro-section">
+              <div class="intro-content" [innerHTML]="formatDescription(getLocalizedText(project()!.introDescription!))"></div>
+            </section>
+          }
+
+          <!-- Demo Videos Gallery - MOVED UP for visual emphasis -->
+          @if (project()!.demoVideos && project()!.demoVideos!.length > 0) {
+            <section id="demo-videos" class="content-section demo-section">
+              <!-- Header -->
+              <div class="demo-header">
+                <div>
+                  <h2 class="section-title">
+                    <span class="demo-icon">🎬</span>
+                    {{ t('demoVideos') }}
+                  </h2>
+                  <p class="demo-subtitle">{{ t('demoVideosSubtitle') }}</p>
+                  <p class="autoplay-hint">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 3l14 9-14 9V3z"/>
+                    </svg>
+                    {{ t('autoplayHint') }}
+                  </p>
+                </div>
+                <span class="video-count">
+                  <span class="pulse-dot"></span>
+                  {{ filteredDemoVideos().length }} {{ t('videos') }}
+                </span>
+              </div>
+
+              <!-- Category Pills - Dynamic -->
+              <div class="filter-row">
+                <button (click)="setVideoFilter('all')" class="filter-pill" [class.active]="videoFilter() === 'all'">
+                  {{ t('filterAll') }}
+                </button>
+                @for (category of videoCategories(); track category) {
+                  <button 
+                    (click)="setVideoFilter(category)" 
+                    class="filter-pill" 
+                    [class.active]="videoFilter() === category"
+                    [attr.data-category]="category">
+                    {{ getCategoryLabel(category) }}
+                  </button>
+                }
+              </div>
+
+              <!-- SensAi: Separate videos by category with legends -->
+              @if (project()!.id === 'sensai' && videoFilter() === 'all') {
+                <!-- App Videos Section -->
+                @if (hasCategory('app')) {
+                  <div class="category-legend app-legend">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                      <line x1="12" y1="18" x2="12.01" y2="18"/>
+                    </svg>
+                    <span>{{ t('sensaiAppLegend') }}</span>
+                  </div>
+                  <div class="videos-grid">
+                    @for (video of getVideosByCategory('app'); track video.url) {
+                      <div class="video-card" 
+                           (click)="openVideoModal(video)"
+                           (mouseenter)="onVideoCardEnter($event)"
+                           (mouseleave)="onVideoCardLeave($event)">
+                        <div class="phone-mockup">
+                          <div class="phone-notch"></div>
+                          <video 
+                            [src]="video.url"
+                            class="phone-screen"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                          </video>
+                          <div class="play-overlay">
+                            <div class="play-btn">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                          </div>
+                          <span class="category-indicator cat-app"></span>
+                        </div>
+                        <div class="video-info">
+                          <h4>{{ cleanTitle(getLocalizedText(video.title)) }}</h4>
+                          <p>{{ getLocalizedText(video.description!) }}</p>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                }
+                
+                <!-- Model Videos Section -->
+                @if (hasCategory('model')) {
+                  <div class="category-legend model-legend" style="margin-top: 2rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="3" y1="9" x2="21" y2="9"/>
+                      <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                    <span>{{ t('sensaiModelLegend') }}</span>
+                  </div>
+                  <div class="videos-grid">
+                    @for (video of getVideosByCategory('model'); track video.url) {
+                      <div class="video-card" 
+                           (click)="openVideoModal(video)"
+                           (mouseenter)="onVideoCardEnter($event)"
+                           (mouseleave)="onVideoCardLeave($event)">
+                        <div class="phone-mockup" [class.landscape-mockup]="video.format === 'landscape'">
+                          @if (video.format !== 'landscape') {
+                            <div class="phone-notch"></div>
+                          }
+                          <video 
+                            [src]="video.url"
+                            class="phone-screen"
+                            [class.landscape-screen]="video.format === 'landscape'"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                          </video>
+                          <div class="play-overlay" [class.landscape-overlay]="video.format === 'landscape'">
+                            <div class="play-btn">
+                              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                          </div>
+                          <span class="category-indicator cat-model"></span>
+                        </div>
+                        <div class="video-info">
+                          <h4>{{ cleanTitle(getLocalizedText(video.title)) }}</h4>
+                          <p>{{ getLocalizedText(video.description!) }}</p>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                }
+              } @else {
+                <!-- Standard Videos Grid for other projects or filtered view -->
+                @if (project()!.id === 'sensai' && videoFilter() === 'app') {
+                  <div class="category-legend app-legend">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                      <line x1="12" y1="18" x2="12.01" y2="18"/>
+                    </svg>
+                    <span>{{ t('sensaiAppLegend') }}</span>
+                  </div>
+                }
+                @if (project()!.id === 'sensai' && videoFilter() === 'model') {
+                  <div class="category-legend model-legend">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="3" y1="9" x2="21" y2="9"/>
+                      <line x1="9" y1="21" x2="9" y2="9"/>
+                    </svg>
+                    <span>{{ t('sensaiModelLegend') }}</span>
+                  </div>
+                }
+
+                <!-- Videos Grid -->
+                <div class="videos-grid" [class.desktop-grid]="project()!.videoFormat === 'desktop'">
+                  @for (video of filteredDemoVideos(); track video.url) {
+                    <div class="video-card" 
+                         (click)="openVideoModal(video)"
+                         (mouseenter)="onVideoCardEnter($event)"
+                         (mouseleave)="onVideoCardLeave($event)">
+                      <div class="phone-mockup" [class.desktop-mockup]="project()!.videoFormat === 'desktop'" [class.landscape-mockup]="video.format === 'landscape'">
+                        @if (project()!.videoFormat !== 'desktop' && video.format !== 'landscape') {
+                          <div class="phone-notch"></div>
+                        }
+                        <video 
+                          [src]="video.url"
+                          class="phone-screen"
+                          [class.desktop-screen]="project()!.videoFormat === 'desktop'"
+                          [class.landscape-screen]="video.format === 'landscape'"
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata">
+                        </video>
+                        <div class="play-overlay" [class.desktop-overlay]="project()!.videoFormat === 'desktop'" [class.landscape-overlay]="video.format === 'landscape'">
+                          <div class="play-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                          </div>
+                        </div>
+                        <span class="category-indicator" [class]="'cat-' + video.category"></span>
+                      </div>
+                      <div class="video-info">
+                        <h4>{{ cleanTitle(getLocalizedText(video.title)) }}</h4>
+                        <p>{{ getLocalizedText(video.description!) }}</p>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+
+              @if (filteredDemoVideos().length === 0) {
+                <div class="empty-state">
+                  <span>🎬</span>
+                  <p>{{ t('noVideosInCategory') }}</p>
+                </div>
+              }
+            </section>
+          }
+
+          <!-- Full Description - Technical details section -->
           <section class="content-section">
             <h2 class="section-title">{{ t('description') }}</h2>
             <div class="description-content" [innerHTML]="formatDescription(getLocalizedText(project()!.fullDescription))"></div>
@@ -173,122 +375,70 @@ import { getProjectById, Project } from '../../core/data/projects.data';
             </section>
           }
 
-          <!-- Demo Videos Gallery -->
-          @if (project()!.demoVideos && project()!.demoVideos!.length > 0) {
-            <section id="demo-videos" class="content-section demo-section">
-              <!-- Header -->
-              <div class="demo-header">
-                <div>
-                  <h2 class="section-title">
-                    <span class="demo-icon">:)</span>
-                    {{ t('demoVideos') }}
-                  </h2>
-                  <p class="demo-subtitle">{{ t('demoVideosSubtitle') }}</p>
-                  <p class="autoplay-hint">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M5 3l14 9-14 9V3z"/>
-                    </svg>
-                    {{ t('autoplayHint') }}
-                  </p>
-                </div>
-                <span class="video-count">
-                  <span class="pulse-dot"></span>
-                  {{ filteredDemoVideos().length }} {{ t('videos') }}
-                </span>
-              </div>
-
-              <!-- Category Pills - Dynamic -->
-              <div class="filter-row">
-                <button (click)="setVideoFilter('all')" class="filter-pill" [class.active]="videoFilter() === 'all'">
-                  {{ t('filterAll') }}
-                </button>
-                @for (category of videoCategories(); track category) {
+          <!-- Gallery Section - Interface screenshots -->
+          @if (project()!.gallery && project()!.gallery!.length > 0) {
+            <section class="content-section gallery-section">
+              <h2 class="section-title">{{ t('interfaceGallery') }}</h2>
+              <div class="gallery-tabs">
+                @for (galleryGroup of project()!.gallery; track galleryGroup.title.es; let i = $index) {
                   <button 
-                    (click)="setVideoFilter(category)" 
-                    class="filter-pill" 
-                    [class.active]="videoFilter() === category"
-                    [attr.data-category]="category">
-                    {{ getCategoryLabel(category) }}
+                    class="gallery-tab" 
+                    [class.active]="activeGalleryTab() === i"
+                    (click)="setActiveGalleryTab(i)">
+                    {{ getLocalizedText(galleryGroup.title) }}
                   </button>
                 }
               </div>
-
-              <!-- Videos Grid -->
-              <div class="videos-grid" [class.desktop-grid]="project()!.videoFormat === 'desktop'">
-                @for (video of filteredDemoVideos(); track video.url) {
-                  <div class="video-card" 
-                       (click)="openVideoModal(video)"
-                       (mouseenter)="onVideoCardEnter($event)"
-                       (mouseleave)="onVideoCardLeave($event)">
-                    <div class="phone-mockup" [class.desktop-mockup]="project()!.videoFormat === 'desktop'">
-                      @if (project()!.videoFormat !== 'desktop') {
-                        <div class="phone-notch"></div>
-                      }
-                      <video 
-                        [src]="video.url"
-                        class="phone-screen"
-                        [class.desktop-screen]="project()!.videoFormat === 'desktop'"
-                        muted
-                        loop
-                        playsinline
-                        preload="metadata">
-                      </video>
-                      <div class="play-overlay" [class.desktop-overlay]="project()!.videoFormat === 'desktop'">
-                        <div class="play-btn">
-                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                      </div>
-                      <span class="category-indicator" [class]="'cat-' + video.category"></span>
-                    </div>
-                    <div class="video-info">
-                      <h4>{{ cleanTitle(getLocalizedText(video.title)) }}</h4>
-                      <p>{{ getLocalizedText(video.description!) }}</p>
-                    </div>
-                  </div>
-                }
-              </div>
-
-              @if (filteredDemoVideos().length === 0) {
-                <div class="empty-state">
-                  <span>🎬</span>
-                  <p>{{ t('noVideosInCategory') }}</p>
-                </div>
-              }
-            </section>
-
-            <!-- Video Modal -->
-            @if (selectedVideo()) {
-              <div class="modal-backdrop" (click)="closeVideoModal()">
-                <div class="modal-container" [class.modal-desktop]="project()!.videoFormat === 'desktop'" (click)="$event.stopPropagation()">
-                  <button class="modal-close" (click)="closeVideoModal()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                  </button>
-                  <div class="modal-phone" [class.modal-phone-desktop]="project()!.videoFormat === 'desktop'">
-                    @if (project()!.videoFormat !== 'desktop') {
-                      <div class="modal-notch"></div>
+              <div class="gallery-grid">
+                @for (image of project()!.gallery![activeGalleryTab()].images; track image.url) {
+                  <div class="gallery-item" (click)="openImageModal(image.url)">
+                    <img [src]="image.url" [alt]="image.caption ? getLocalizedText(image.caption) : ''" loading="lazy">
+                    @if (image.caption) {
+                      <div class="gallery-caption">{{ getLocalizedText(image.caption) }}</div>
                     }
-                    <video 
-                      [src]="selectedVideo()!.url"
-                      class="modal-video"
-                      [class.modal-video-desktop]="project()!.videoFormat === 'desktop'"
-                      autoplay
-                      loop
-                      playsinline
-                      controls>
-                    </video>
+                    <div class="gallery-expand">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                      </svg>
+                    </div>
                   </div>
-                  <div class="modal-info">
-                    <h3>{{ getLocalizedText(selectedVideo()!.title) }}</h3>
-                    <p>{{ getLocalizedText(selectedVideo()!.description!) }}</p>
-                  </div>
-                </div>
+                }
               </div>
-            }
+            </section>
           }
 
-          <!-- Video Demo -->
+          <!-- Video Modal -->
+          @if (selectedVideo()) {
+            <div class="modal-backdrop" (click)="closeVideoModal()">
+              <div class="modal-container" [class.modal-desktop]="isVideoLandscape(selectedVideo())" (click)="$event.stopPropagation()">
+                <button class="modal-close" (click)="closeVideoModal()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+                <div class="modal-phone" [class.modal-phone-desktop]="isVideoLandscape(selectedVideo())">
+                  @if (!isVideoLandscape(selectedVideo())) {
+                    <div class="modal-notch"></div>
+                  }
+                  <video 
+                    [src]="selectedVideo()!.url"
+                    class="modal-video"
+                    [class.modal-video-desktop]="isVideoLandscape(selectedVideo())"
+                    autoplay
+                    loop
+                    playsinline
+                    controls>
+                  </video>
+                </div>
+                <div class="modal-info">
+                  <h3>{{ getLocalizedText(selectedVideo()!.title) }}</h3>
+                  <p>{{ getLocalizedText(selectedVideo()!.description!) }}</p>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Video Demo (single video embed) -->
           @if (project()!.videoUrl) {
             <section class="content-section">
               <h2 class="section-title">{{ t('videoDemo') }}</h2>
@@ -308,33 +458,6 @@ import { getProjectById, Project } from '../../core/data/projects.data';
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                   </iframe>
-                }
-              </div>
-            </section>
-          }
-
-          <!-- Gallery -->
-          @if (project()!.gallery && project()!.gallery!.length > 0) {
-            <section class="content-section gallery-section">
-              <h2 class="section-title">{{ t('interfaceGallery') }}</h2>
-              <div class="gallery-tabs">
-                @for (galleryGroup of project()!.gallery; track galleryGroup.title.es; let i = $index) {
-                  <button 
-                    class="gallery-tab" 
-                    [class.active]="activeGalleryTab() === i"
-                    (click)="setActiveGalleryTab(i)">
-                    {{ getLocalizedText(galleryGroup.title) }}
-                  </button>
-                }
-              </div>
-              <div class="gallery-grid">
-                @for (image of project()!.gallery![activeGalleryTab()].images; track image.url) {
-                  <div class="gallery-item">
-                    <img [src]="image.url" [alt]="image.caption ? getLocalizedText(image.caption) : ''" loading="lazy">
-                    @if (image.caption) {
-                      <span class="gallery-caption">{{ getLocalizedText(image.caption) }}</span>
-                    }
-                  </div>
                 }
               </div>
             </section>
@@ -847,6 +970,43 @@ import { getProjectById, Project } from '../../core/data/projects.data';
     .filter-pill[data-category="app"].active { background: linear-gradient(135deg, #0a4f53, #0097b2); }
     .filter-pill[data-category="model"].active { background: linear-gradient(135deg, #7c3aed, #2563eb); }
 
+    /* Category Legends */
+    .category-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    
+    .category-legend svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+    }
+    
+    .category-legend.app-legend {
+      background: rgba(0, 151, 178, 0.15);
+      border-left: 3px solid #0097b2;
+    }
+    
+    .category-legend.app-legend svg {
+      color: #0097b2;
+    }
+    
+    .category-legend.model-legend {
+      background: rgba(139, 92, 246, 0.15);
+      border-left: 3px solid #8b5cf6;
+    }
+    
+    .category-legend.model-legend svg {
+      color: #8b5cf6;
+    }
+
     /* Videos Grid */
     .videos-grid {
       display: grid;
@@ -910,6 +1070,19 @@ import { getProjectById, Project } from '../../core/data/projects.data';
     }
     
     .phone-mockup.desktop-mockup {
+      border-radius: 0.5rem;
+    }
+    
+    .phone-mockup.landscape-mockup {
+      border-radius: 0.5rem;
+    }
+    
+    .phone-screen.landscape-screen {
+      aspect-ratio: 16 / 9;
+    }
+    
+    .play-overlay.landscape-overlay {
+      inset: 0;
       border-radius: 0.5rem;
     }
     
@@ -1303,11 +1476,13 @@ import { getProjectById, Project } from '../../core/data/projects.data';
       overflow: hidden;
       border: 1px solid rgba(51, 65, 85, 0.5);
       background: rgba(15, 23, 42, 0.5);
+      cursor: pointer;
     }
 
     .gallery-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
       transition: transform 0.3s ease;
     }
@@ -1326,6 +1501,31 @@ import { getProjectById, Project } from '../../core/data/projects.data';
       color: white;
       font-size: 0.75rem;
       text-align: center;
+    }
+    
+    .gallery-expand {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 0.375rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    .gallery-item:hover .gallery-expand {
+      opacity: 1;
+    }
+    
+    .gallery-expand svg {
+      width: 1rem;
+      height: 1rem;
+      color: white;
     }
 
     /* ======================== */
@@ -1481,31 +1681,48 @@ export class ProjectDetailComponent {
     this.videoFilter.set(filter);
   }
   
+  hasCategory(category: string): boolean {
+    return this.videoCategories().includes(category);
+  }
+  
+  getVideosByCategory(category: string): any[] {
+    const proj = this.project();
+    if (!proj?.demoVideos) return [];
+    return proj.demoVideos.filter(v => v.category === category);
+  }
+  
+  isVideoLandscape(video: any): boolean {
+    // Check if video has its own format first, then fall back to project format
+    if (video?.format === 'landscape') return true;
+    if (video?.format === 'mobile') return false;
+    return this.project()?.videoFormat === 'desktop';
+  }
+  
   setActiveGalleryTab(index: number) {
     this.activeGalleryTab.set(index);
   }
   
   getCategoryLabel(category: string): string {
-    const labels: Record<string, { es: string; en: string; icon: string }> = {
+    const labels: Record<string, { es: string; en: string }> = {
       // Tribe categories
-      auth: { es: 'Auth', en: 'Auth', icon: '🔐' },
-      social: { es: 'Social', en: 'Social', icon: '📱' },
-      profile: { es: 'Perfil', en: 'Profile', icon: '👤' },
-      settings: { es: 'Config', en: 'Settings', icon: '⚙️' },
+      auth: { es: 'Auth', en: 'Auth' },
+      social: { es: 'Social', en: 'Social' },
+      profile: { es: 'Perfil', en: 'Profile' },
+      settings: { es: 'Config', en: 'Settings' },
       // Moodflix categories
-      landing: { es: 'Landing', en: 'Landing', icon: '🏠' },
-      discovery: { es: 'Descubrir', en: 'Discovery', icon: '🎲' },
-      playlist: { es: 'Playlists', en: 'Playlists', icon: '📋' },
-      detail: { es: 'Detalle', en: 'Detail', icon: '🎥' },
-      search: { es: 'Búsqueda', en: 'Search', icon: '🔍' },
+      landing: { es: 'Landing', en: 'Landing' },
+      discovery: { es: 'Descubrir', en: 'Discovery' },
+      playlist: { es: 'Playlists', en: 'Playlists' },
+      detail: { es: 'Detalle', en: 'Detail' },
+      search: { es: 'Búsqueda', en: 'Search' },
       // SensAi categories
-      app: { es: 'App', en: 'App', icon: '📱' },
-      model: { es: 'Modelo', en: 'Model', icon: '🔲' },
+      app: { es: 'App', en: 'App' },
+      model: { es: 'Modelo', en: 'Model' },
     };
     const lang = this.translationService.lang();
     const label = labels[category];
     if (label) {
-      return `${label.icon} ${label[lang]}`;
+      return label[lang];
     }
     return category;
   }

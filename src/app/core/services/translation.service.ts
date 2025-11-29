@@ -33,12 +33,12 @@ export class TranslationService {
     'home.greeting': { es: '¡Hola! Soy', en: "Hi! I'm" },
     'home.name': { es: 'Tu Nombre', en: 'Your Name' },
     'home.title': { 
-      es: 'Desarrollador de Software con foco en IA, Cloud y Seguridad', 
-      en: 'Software Developer focused on AI, Cloud & Security' 
+      es: 'Desarrollador de Software con foco en <span class="highlight">IA</span>, <span class="highlight">Cloud</span> y <span class="highlight">Seguridad</span>', 
+      en: 'Software Developer focused on <span class="highlight">AI</span>, <span class="highlight">Cloud</span> & <span class="highlight">Security</span>' 
     },
     'home.description': { 
-      es: 'Apasionado por crear soluciones tecnológicas innovadoras. Me especializo en desarrollo de aplicaciones, machine learning y seguridad informática, siempre buscando aprender y aplicar las mejores prácticas de la industria.',
-      en: 'Passionate about creating innovative technological solutions. I specialize in application development, machine learning, and cybersecurity, always seeking to learn and apply industry best practices.'
+      es: 'Apasionado por crear soluciones tecnológicas innovadoras. Me especializo en <strong>desarrollo de aplicaciones</strong>, <strong>machine learning</strong> y <strong>seguridad informática</strong>, siempre buscando aprender y aplicar las mejores prácticas de la industria.',
+      en: 'Passionate about creating innovative technological solutions. I specialize in <strong>application development</strong>, <strong>machine learning</strong>, and <strong>cybersecurity</strong>, always seeking to learn and apply industry best practices.'
     },
     'home.viewProjects': { es: 'Ver proyectos', en: 'View projects' },
     'home.contactMe': { es: 'Contáctame', en: 'Contact me' },
@@ -46,8 +46,8 @@ export class TranslationService {
     // === About ===
     'about.title': { es: 'Sobre mí', en: 'About me' },
     'about.intro': {
-      es: 'Soy un desarrollador de software con experiencia en múltiples tecnologías y un fuerte interés en la inteligencia artificial, el cloud computing y la seguridad informática.',
-      en: "I'm a software developer with experience in multiple technologies and a strong interest in artificial intelligence, cloud computing, and cybersecurity."
+      es: 'Soy un desarrollador de software con experiencia en múltiples tecnologías y un fuerte interés en la <strong>inteligencia artificial</strong>, el <strong>cloud computing</strong> y la <strong>seguridad informática</strong>.',
+      en: "I'm a software developer with experience in multiple technologies and a strong interest in <strong>artificial intelligence</strong>, <strong>cloud computing</strong>, and <strong>cybersecurity</strong>."
     },
     'about.experience': { es: 'Experiencia', en: 'Experience' },
     'about.education': { es: 'Educación', en: 'Education' },
@@ -75,8 +75,8 @@ export class TranslationService {
     // === ML/AI ===
     'mlai.title': { es: 'Machine Learning & IA', en: 'Machine Learning & AI' },
     'mlai.subtitle': {
-      es: 'Mi área de mayor foco y desarrollo profesional',
-      en: 'My primary area of focus and professional development'
+      es: 'Mi área de <span class="highlight">mayor foco</span> y desarrollo profesional',
+      en: 'My <span class="highlight">primary area of focus</span> and professional development'
     },
     'mlai.focusBadge': {
       es: '🎯 Área de Especialización',
@@ -92,8 +92,8 @@ export class TranslationService {
     },
     'mlai.approach': { es: 'Mi enfoque', en: 'My approach' },
     'mlai.approachText': {
-      es: 'Machine Learning e Inteligencia Artificial es el área en la que más foco estoy haciendo y donde más me estoy capacitando actualmente. Me apasiona desarrollar soluciones prácticas de ML, desde la recolección y preparación de datos hasta el entrenamiento y despliegue de modelos en producción. Trabajo principalmente con visión por computadora y detección de objetos, aplicando técnicas de deep learning para resolver problemas del mundo real.',
-      en: 'Machine Learning and Artificial Intelligence is the area where I am most focused and where I am currently training the most. I am passionate about developing practical ML solutions, from data collection and preparation to model training and production deployment. I primarily work with computer vision and object detection, applying deep learning techniques to solve real-world problems.'
+      es: '<strong>Machine Learning e Inteligencia Artificial</strong> es el área en la que más foco estoy haciendo y donde más me estoy capacitando actualmente. Me apasiona desarrollar soluciones prácticas de ML, desde la recolección y preparación de datos hasta el entrenamiento y <strong>despliegue de modelos en producción</strong>. Trabajo principalmente con <strong>visión por computadora</strong> y detección de objetos, aplicando técnicas de deep learning para resolver problemas del mundo real.',
+      en: '<strong>Machine Learning and Artificial Intelligence</strong> is the area where I am most focused and where I am currently training the most. I am passionate about developing practical ML solutions, from data collection and preparation to model training and <strong>production deployment</strong>. I primarily work with <strong>computer vision</strong> and object detection, applying deep learning techniques to solve real-world problems.'
     },
     'mlai.pipeline': { es: 'Pipeline típico', en: 'Typical pipeline' },
     'mlai.datasets': { es: 'Datasets', en: 'Datasets' },
@@ -104,12 +104,12 @@ export class TranslationService {
     // === Security ===
     'security.title': { es: 'Seguridad Informática', en: 'Cybersecurity' },
     'security.subtitle': {
-      es: 'Protegiendo sistemas y datos',
-      en: 'Protecting systems and data'
+      es: 'Protegiendo <span class="highlight">sistemas</span> y <span class="highlight">datos</span>',
+      en: 'Protecting <span class="highlight">systems</span> and <span class="highlight">data</span>'
     },
     'security.interest': {
-      es: 'Tengo un fuerte interés en la ciberseguridad y aplico buenas prácticas de seguridad en todos mis proyectos. Estoy constantemente aprendiendo sobre nuevas vulnerabilidades, técnicas de defensa y herramientas de auditoría.',
-      en: "I have a strong interest in cybersecurity and apply security best practices in all my projects. I'm constantly learning about new vulnerabilities, defense techniques, and auditing tools."
+      es: 'Tengo un fuerte interés en la <strong>ciberseguridad</strong> y aplico buenas prácticas de seguridad en todos mis proyectos. Estoy constantemente aprendiendo sobre nuevas vulnerabilidades, <strong>técnicas de defensa</strong> y herramientas de auditoría.',
+      en: "I have a strong interest in <strong>cybersecurity</strong> and apply security best practices in all my projects. I'm constantly learning about new vulnerabilities, <strong>defense techniques</strong>, and auditing tools."
     },
     'security.practices': { es: 'Buenas prácticas que aplico', en: 'Best practices I apply' },
     'security.practice1': { es: 'Gestión segura de credenciales y secretos', en: 'Secure credential and secrets management' },
@@ -175,6 +175,8 @@ export class TranslationService {
     'filterProfile': { es: 'Perfil', en: 'Profile' },
     'filterSettings': { es: 'Configuración', en: 'Settings' },
     'noVideosInCategory': { es: 'No hay videos en esta categoría', en: 'No videos in this category' },
+    'sensaiAppLegend': { es: 'Vista de la app: detecta objetos y los informa de forma auditiva y háptica', en: 'App view: detects objects and reports them with audio and haptic feedback' },
+    'sensaiModelLegend': { es: 'Vista del modelo: visualización técnica de las bounding boxes (no visible en la app)', en: 'Model view: technical visualization of bounding boxes (not visible in the app)' },
     'videoDemo': { es: 'Video Demo', en: 'Video Demo' },
     'viewCode': { es: 'Ver código', en: 'View code' },
     'liveDemo': { es: 'Demo en vivo', en: 'Live demo' },

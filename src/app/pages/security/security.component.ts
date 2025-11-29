@@ -13,7 +13,7 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
         <!-- Section Header -->
         <div class="section-header">
           <h1 class="section-title">{{ t.t('security.title') }}</h1>
-          <p class="section-subtitle">{{ t.t('security.subtitle') }}</p>
+          <p class="section-subtitle" [innerHTML]="t.t('security.subtitle')"></p>
         </div>
 
         <!-- Interest Section -->
@@ -24,7 +24,7 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
               </svg>
             </div>
-            <p class="interest-text">{{ t.t('security.interest') }}</p>
+            <p class="interest-text" [innerHTML]="t.t('security.interest')"></p>
           </div>
         </div>
 
@@ -177,6 +177,11 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
       font-size: 1.1rem;
       max-width: 600px;
       margin: 0 auto;
+      
+      ::ng-deep .highlight {
+        color: var(--color-accent-primary);
+        font-weight: 600;
+      }
     }
 
     /* Interest Section */
@@ -223,6 +228,11 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
       font-size: 1.05rem;
       line-height: 1.8;
       margin: 0;
+      
+      ::ng-deep strong {
+        color: var(--color-text-primary);
+        font-weight: 600;
+      }
     }
 
     /* Content Grid */

@@ -14,7 +14,7 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
         <!-- Section Header -->
         <div class="section-header">
           <h1 class="section-title">{{ t.t('mlai.title') }}</h1>
-          <p class="section-subtitle">{{ t.t('mlai.subtitle') }}</p>
+          <p class="section-subtitle" [innerHTML]="t.t('mlai.subtitle')"></p>
         </div>
 
         <!-- Approach Section -->
@@ -28,7 +28,7 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
               </svg>
               {{ t.t('mlai.approach') }}
             </h2>
-            <p class="approach-text">{{ t.t('mlai.approachText') }}</p>
+            <p class="approach-text" [innerHTML]="t.t('mlai.approachText')"></p>
           </div>
 
           <!-- Pipeline Visualization -->
@@ -221,6 +221,11 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
       font-size: 1.1rem;
       max-width: 600px;
       margin: 0 auto;
+      
+      ::ng-deep .highlight {
+        color: var(--color-accent-primary);
+        font-weight: 600;
+      }
     }
 
     /* Approach Section */
@@ -248,6 +253,11 @@ import { getProjectsByCategory, getProjectsByTag, Project } from '../../core/dat
       color: var(--color-text-secondary);
       line-height: 1.8;
       font-size: 1rem;
+      
+      ::ng-deep strong {
+        color: var(--color-text-primary);
+        font-weight: 600;
+      }
     }
 
     /* Pipeline */

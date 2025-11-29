@@ -1,0 +1,1251 @@
+﻿/**
+ * Datos de proyectos para el portfolio
+ * Este archivo contiene toda la informació³n de los proyectos que se muestran en el sitio.
+ * Para agregar un nuevo proyecto, simplemente aó±ade un objeto al array correspondiente.
+ */
+
+export interface ProjectSection {
+  title: {
+    es: string;
+    en: string;
+  };
+  content: {
+    es: string;
+    en: string;
+  };
+  imageUrl?: string;
+  diagramUrl?: string;
+}
+
+export interface ProjectLink {
+  label: {
+    es: string;
+    en: string;
+  };
+  url: string;
+  type: 'github' | 'demo' | 'video' | 'docs' | 'diagram';
+}
+
+export interface Project {
+  id: string;
+  title: {
+    es: string;
+    en: string;
+  };
+  shortDescription: {
+    es: string;
+    en: string;
+  };
+  fullDescription: {
+    es: string;
+    en: string;
+  };
+  technologies: string[];
+  tags: ProjectTag[];
+  imageUrl?: string;
+  imageStyle?: 'cover' | 'contain'; // 'cover' para fotos, 'contain' para logos
+  videoUrl?: string;
+  demoUrl?: string;
+  codeUrl?: string;
+  featured: boolean;
+  category: 'main' | 'ml' | 'security' | 'cloud';
+  // Campos extendidos para pó¡gina de detalle
+  sections?: ProjectSection[];
+  links?: ProjectLink[];
+  highlights?: {
+    es: string[];
+    en: string[];
+  };
+  diagrams?: {
+    title: { es: string; en: string };
+    url: string;
+    description?: { es: string; en: string };
+  }[];
+  // Videos de demo para mostrar funcionalidades
+  demoVideos?: {
+    title: { es: string; en: string };
+    url: string;
+    description?: { es: string; en: string };
+    category?: string; // Flexible para cada proyecto: 'auth', 'social', 'profile', 'settings', 'landing', 'discovery', 'playlist', 'detail', 'search', etc.
+  }[];
+  // Formato de video: 'mobile' (9:16) o 'desktop' (16:9)
+  videoFormat?: 'mobile' | 'desktop';
+  // Galeró­a de imó¡genes para mostrar capturas de pantalla
+  gallery?: {
+    title: { es: string; en: string };
+    images: {
+      url: string;
+      caption?: { es: string; en: string };
+    }[];
+  }[];
+  role?: {
+    es: string;
+    en: string;
+  };
+  duration?: string;
+  team?: number;
+}
+
+export type ProjectTag = 'Mobile' | 'Web' | 'Desktop' | 'ML' | 'Security' | 'Cloud' | 'API' | 'Data' | 'IaC';
+
+// ============================================
+// PROYECTOS PRINCIPALES
+// ============================================
+
+export const PROJECTS: Project[] = [
+  // === SensAi - PROYECTO DESTACADO ===
+  {
+    id: 'sensai',
+    title: {
+      es: 'SensAi',
+      en: 'SensAi'
+    },
+    shortDescription: {
+      es: 'Aplicació³n mó³vil de asistencia para personas con discapacidad visual mediante visió³n computacional e IA. Detecta peatones, veredas rotas y colectivos en tiempo real.',
+      en: 'Mobile assistance app for visually impaired people using computer vision and AI. Detects pedestrians, broken sidewalks and buses in real-time.'
+    },
+    fullDescription: {
+      es: `SensAi es una aplicació³n Android que utiliza **Machine Learning y Visió³n por Computadora** para asistir a personas con discapacidad visual en el órea Metropolitana de Buenos Aires (AMBA). El nombre surge de la combinació³n entre "sensei" (maestro o guó­a en japonó©s) y "AI" (Inteligencia Artificial): un "maestro de los sentidos" que acompaó±a y potencia la percepció³n de los usuarios.
+
+**Arquitectura de Machine Learning**
+
+El nóºcleo de SensAi son **3 modelos de detecció³n de objetos personalizados** optimizados para inferencia mó³vil:
+
+â€¢ **Modelo de Peatones**: Detecta personas en movimiento o detenidas en el camino del usuario
+â€¢ **Modelo de Veredas**: Identifica daó±os en el pavimento como baldosas rotas, faltantes y desniveles
+â€¢ **Modelo de Colectivos**: Reconoce las ló­neas 324, 152 y 365 por su carteleró­a frontal
+
+Cada modelo fue entrenado con datasets propios recolectados especó­ficamente en el entorno urbano del AMBA, totalizando aproximadamente **2400 imó¡genes etiquetadas manualmente** con Label Studio.
+
+**Pipeline de ML End-to-End**
+
+El proyecto abarca el ciclo completo de un sistema de ML en producció³n:
+
+1. **Recolecció³n de Datos**: Captura de imó¡genes en distintas condiciones de luz, clima y ubicaciones
+2. **Etiquetado**: Anotació³n manual de bounding boxes para cada clase objetivo
+3. **Entrenamiento**: Fine-tuning de YOLOv8 con augmentació³n de datos personalizada
+4. **Optimizació³n**: Conversió³n a ONNX con NMS integrado para reducir latencia
+5. **Deployment**: Integració³n con ONNX Runtime en Android para inferencia en dispositivo
+
+**Valor del ML en este Caso de Uso**
+
+La aplicació³n de tó©cnicas de Deep Learning permite resolver problemas que seró­an imposibles con programació³n tradicional:
+
+â€¢ **Generalizació³n**: Los modelos detectan obstó¡culos en escenarios nunca vistos durante el entrenamiento
+â€¢ **Tiempo Real**: Inferencia de ~50ms por frame permite alertas instantó¡neas al usuario
+â€¢ **Sin Internet**: El procesamiento on-device garantiza funcionamiento offline y disponibilidad
+â€¢ **Adaptabilidad**: Los modelos pueden re-entrenarse con nuevos datos para mejorar precisió³n
+
+**Investigació³n con Usuarios**
+
+Se realizaron entrevistas semiestructuradas a 7 personas con distintos grados de discapacidad visual. Los hallazgos definieron las detecciones prioritarias: personas como principal obstó¡culo, veredas en mal estado como segundo problema mó¡s reportado, y la necesidad de identificar colectivos en paradas concurridas.`,
+      en: `SensAi is an Android application that uses **Machine Learning and Computer Vision** to assist visually impaired people in the Buenos Aires Metropolitan Area (AMBA). The name comes from combining "sensei" (teacher or guide in Japanese) and "AI" (Artificial Intelligence): a "master of the senses" that accompanies and enhances users' perception.
+
+**Machine Learning Architecture**
+
+The core of SensAi consists of **3 custom object detection models** optimized for mobile inference:
+
+â€¢ **Pedestrian Model**: Detects people moving or standing in the user's path
+â€¢ **Sidewalk Model**: Identifies pavement damage such as broken tiles, missing tiles, and uneven surfaces
+â€¢ **Bus Model**: Recognizes lines 324, 152, and 365 by their front signage
+
+Each model was trained with proprietary datasets collected specifically in the AMBA urban environment, totaling approximately **2400 manually labeled images** using Label Studio.
+
+**End-to-End ML Pipeline**
+
+The project covers the complete lifecycle of a production ML system:
+
+1. **Data Collection**: Image capture under different lighting, weather, and location conditions
+2. **Labeling**: Manual bounding box annotation for each target class
+3. **Training**: YOLOv8 fine-tuning with custom data augmentation
+4. **Optimization**: Conversion to ONNX with integrated NMS to reduce latency
+5. **Deployment**: Integration with ONNX Runtime on Android for on-device inference
+
+**ML Value for this Use Case**
+
+Applying Deep Learning techniques solves problems that would be impossible with traditional programming:
+
+â€¢ **Generalization**: Models detect obstacles in scenarios never seen during training
+â€¢ **Real-Time**: ~50ms inference per frame enables instant user alerts
+â€¢ **No Internet**: On-device processing ensures offline operation and availability
+â€¢ **Adaptability**: Models can be retrained with new data to improve accuracy
+
+**User Research**
+
+Semi-structured interviews were conducted with 7 people with varying degrees of visual impairment. Findings defined priority detections: people as the main obstacle, poorly maintained sidewalks as the second most reported problem, and the need to identify buses at busy stops.`
+    },
+    technologies: ['Android', 'Kotlin', 'Python', 'YOLOv8', 'ONNX Runtime', 'TensorFlow', 'OpenCV', 'Label Studio', 'TalkBack', 'CameraX'],
+    tags: ['Mobile', 'ML', 'Data'],
+    imageUrl: 'assets/images/sensai/modo_claro (1).webp',
+    imageStyle: 'contain',
+    videoUrl: '',
+    codeUrl: 'https://github.com/juani8/sensai',
+    featured: true,
+    category: 'ml',
+    role: {
+      es: 'Desarrollador Full Stack & ML Engineer',
+      en: 'Full Stack Developer & ML Engineer'
+    },
+    duration: '6 meses',
+    team: 2,
+    highlights: {
+      es: [
+        'Pipeline completo de ML: recolecció³n de datos, etiquetado, entrenamiento y deployment',
+        '3 modelos YOLO personalizados entrenados con datasets propios (~2400 imó¡genes)',
+        'Optimizació³n de modelos para inferencia mó³vil con ONNX Runtime',
+        'Procesamiento en tiempo real con baja latencia y funcionamiento offline',
+        'Diseó±o centrado en accesibilidad con soporte completo para TalkBack',
+        'Feedback multimodal: visual, auditivo (TTS) y hó¡ptico',
+        'Modos de alto contraste y tipografó­a Atkinson Hyperlegible',
+        'Validació³n con usuarios reales con discapacidad visual'
+      ],
+      en: [
+        'Complete ML pipeline: data collection, labeling, training and deployment',
+        '3 custom YOLO models trained with proprietary datasets (~2400 images)',
+        'Model optimization for mobile inference with ONNX Runtime',
+        'Real-time processing with low latency and offline operation',
+        'Accessibility-centered design with full TalkBack support',
+        'Multimodal feedback: visual, audio (TTS) and haptic',
+        'High contrast modes and Atkinson Hyperlegible typography',
+        'Validation with real users with visual impairments'
+      ]
+    },
+    sections: [
+      {
+        title: {
+          es: 'Proceso de Inferencia',
+          en: 'Inference Process'
+        },
+        content: {
+          es: `El flujo de datos durante el uso de los modelos de detecció³n sigue tres fases:
+
+**1. Preprocesamiento**
+Captura del entorno desde la có¡mara â†’ Redimensionamiento a 640ó—640 â†’ Normalizació³n â†’ Tensorizació³n para compatibilidad con los modelos.
+
+**2. Inferencia**
+El modelo ONNX recibe las imó¡genes preprocesadas y genera predicciones numó©ricas. Estas se decodifican para obtener las coordenadas de las cajas delimitadoras (bounding boxes). Se aplica filtrado por nivel de confianza y el algoritmo NMS (Non-Maximum Suppression) para eliminar solapamientos.
+
+**3. Posprocesamiento**
+Los resultados se transforman a dimensiones originales y se enriquecen con contadores y alertas accesibles para el usuario mediante TTS y vibraciones.`,
+          en: `The data flow during model usage follows three phases:
+
+**1. Preprocessing**
+Environment capture from camera â†’ Resize to 640ó—640 â†’ Normalization â†’ Tensorization for model compatibility.
+
+**2. Inference**
+The ONNX model receives preprocessed images and generates numerical predictions. These are decoded to obtain bounding box coordinates. Confidence-level filtering and NMS (Non-Maximum Suppression) algorithm are applied to eliminate overlaps.
+
+**3. Postprocessing**
+Results are transformed back to original dimensions and enriched with counters and accessible alerts for the user via TTS and vibrations.`
+        }
+      },
+      {
+        title: {
+          es: 'Pipeline ETL de Entrenamiento',
+          en: 'Training ETL Pipeline'
+        },
+        content: {
+          es: `El proceso de entrenamiento de los modelos sigue un pipeline ETL riguroso:
+
+**Extracció³n**
+Recolecció³n de imó¡genes desde móºltiples fuentes: capturas propias en distintas zonas del AMBA (veredas), imó¡genes web y frames de video (colectivos), y datasets póºblicos depurados (peatones).
+
+**Transformació³n**
+â€¢ Etiquetado manual con Label Studio definiendo clases y bounding boxes
+â€¢ Generació³n de particiones 80/10/10 (train/val/test)
+â€¢ Augmentació³n de datos: variaciones de iluminació³n, rotaciones, escalados, mosaic
+
+**Carga**
+Entrenamiento iterativo ajustando hiperparó¡metros hasta alcanzar mó©tricas satisfactorias. Exportació³n a ONNX con NMS incorporado para simplificar la inferencia mó³vil.`,
+          en: `The model training process follows a rigorous ETL pipeline:
+
+**Extraction**
+Image collection from multiple sources: own captures in different AMBA areas (sidewalks), web images and video frames (buses), and curated public datasets (pedestrians).
+
+**Transformation**
+â€¢ Manual labeling with Label Studio defining classes and bounding boxes
+â€¢ 80/10/10 partition generation (train/val/test)
+â€¢ Data augmentation: lighting variations, rotations, scaling, mosaic
+
+**Load**
+Iterative training adjusting hyperparameters until satisfactory metrics are achieved. Export to ONNX with built-in NMS to simplify mobile inference.`
+        },
+        diagramUrl: 'assets/documentos/sensai/ETL de aprendizaje automó¡tico.pdf'
+      },
+      {
+        title: {
+          es: 'Confecció³n de Datasets',
+          en: 'Dataset Creation'
+        },
+        content: {
+          es: `Se construyeron tres datasets independientes para entrenar modelos especializados:
+
+**Dataset de Veredas (~600 imó¡genes)**
+Capturas propias en el AMBA en diferentes condiciones de iluminació³n y clima. Clase óºnica "daó±o en vereda" que incluye baldosas levantadas, faltantes y desniveles.
+â€¢ Entrenamiento: 200 ó©pocas, paciencia 40, batch 16
+â€¢ Augmentació³n fuerte en iluminació³n y saturació³n
+
+**Dataset de Peatones (~1000 imó¡genes)**
+Datasets póºblicos depurados para incluir solo personas cercanas como obstó¡culos.
+â€¢ Entrenamiento: 120 ó©pocas, paciencia 25, batch 16
+â€¢ Augmentació³n centrada en variaciones de iluminació³n urbana
+
+**Dataset de Colectivos (~800 imó¡genes)**
+Imó¡genes web y frames de video con frentes de colectivos. Clases separadas por ló­nea (324, 152, 365) con 125-400 imó¡genes cada una.
+â€¢ Entrenamiento: 150 ó©pocas, paciencia 30, batch 16
+â€¢ Augmentació³n geomó©trica suave para no desestructurar la morfologó­a`,
+          en: `Three independent datasets were built to train specialized models:
+
+**Sidewalks Dataset (~600 images)**
+Own captures in AMBA under different lighting and weather conditions. Single class "sidewalk damage" including raised, missing tiles and uneven surfaces.
+â€¢ Training: 200 epochs, patience 40, batch 16
+â€¢ Strong augmentation in lighting and saturation
+
+**Pedestrians Dataset (~1000 images)**
+Curated public datasets to include only nearby people as obstacles.
+â€¢ Training: 120 epochs, patience 25, batch 16
+â€¢ Augmentation focused on urban lighting variations
+
+**Buses Dataset (~800 images)**
+Web images and video frames with bus fronts. Separate classes by line (324, 152, 365) with 125-400 images each.
+â€¢ Training: 150 epochs, patience 30, batch 16
+â€¢ Soft geometric augmentation to not destructure morphology`
+        }
+      },
+      {
+        title: {
+          es: 'Diseó±o Accesible',
+          en: 'Accessible Design'
+        },
+        content: {
+          es: `SensAi fue diseó±ada desde su origen para personas con discapacidad visual:
+
+**Feedback Multimodal**
+â€¢ Visual: cambios en borde/relleno de tiles ON/OFF
+â€¢ Auditivo: mensajes TTS breves como "Peató³n detectado"
+â€¢ Hó¡ptico: patrones de vibració³n para obstó¡culos y colectivos
+
+**Compatibilidad TalkBack**
+â€¢ Descripciones claras en cada botó³n y secció³n
+â€¢ Tó­tulos marcados como encabezados para navegació³n
+â€¢ Estructura predecible con recorrido lineal
+â€¢ óreas de contacto amplias y fó¡ciles de encontrar
+
+**Accesibilidad Visual**
+â€¢ Tipografó­a Atkinson Hyperlegible (diseó±ada por Braille Institute)
+â€¢ Modos claro, oscuro y alto contraste
+â€¢ Ajuste de tamaó±o de tipografó­a`,
+          en: `SensAi was designed from the ground up for visually impaired people:
+
+**Multimodal Feedback**
+â€¢ Visual: border/fill changes in ON/OFF tiles
+â€¢ Audio: brief TTS messages like "Pedestrian detected"
+â€¢ Haptic: vibration patterns for obstacles and buses
+
+**TalkBack Compatibility**
+â€¢ Clear descriptions on each button and section
+â€¢ Titles marked as headings for navigation
+â€¢ Predictable structure with linear traversal
+â€¢ Large, easy-to-find touch areas
+
+**Visual Accessibility**
+â€¢ Atkinson Hyperlegible typography (designed by Braille Institute)
+â€¢ Light, dark and high contrast modes
+â€¢ Font size adjustment`
+        }
+      },
+      {
+        title: {
+          es: 'Anó¡lisis Competitivo',
+          en: 'Competitive Analysis'
+        },
+        content: {
+          es: `SensAi se diferencia de las soluciones existentes en varios aspectos clave:
+
+**vs Ray-Ban Meta / OrCam MyEye**
+No requiere hardware adicional costoso. Funciona óºnicamente con el celular que el usuario ya posee.
+
+**vs Google Lookout**
+óšnica solució³n con detecció³n de veredas rotas, uno de los obstó¡culos mó¡s reportados en el AMBA.
+
+**vs WeWALK**
+Distingue la naturaleza de los obstó¡culos (persona vs vereda vs colectivo), no solo advierte su presencia.
+
+**vs Moovit / Cuó¡ndo SUBO**
+Permite identificar visualmente quó© colectivo llegó³ cuando varias ló­neas coinciden en la misma parada, no depende solo de GPS.
+
+**Propuesta óšnica**
+Diseó±o centrado en discapacidad visual desde el origen, no como feature agregada posteriormente.`,
+          en: `SensAi differentiates from existing solutions in several key aspects:
+
+**vs Ray-Ban Meta / OrCam MyEye**
+No expensive additional hardware required. Works only with the phone the user already owns.
+
+**vs Google Lookout**
+Only solution with broken sidewalk detection, one of the most reported obstacles in AMBA.
+
+**vs WeWALK**
+Distinguishes the nature of obstacles (person vs sidewalk vs bus), not just warns of their presence.
+
+**vs Moovit / Cuó¡ndo SUBO**
+Allows visual identification of which bus arrived when multiple lines coincide at the same stop, not dependent on GPS alone.
+
+**Unique Proposition**
+Design centered on visual impairment from the start, not as a feature added later.`
+        },
+        imageUrl: 'assets/images/sensai/sensai_competencia.webp'
+      }
+    ],
+    diagrams: [
+      {
+        title: { es: 'Arquitectura de Alto Nivel', en: 'High-Level Architecture' },
+        url: 'assets/documentos/sensai/sensai_alto_nivel2.pdf',
+        description: { es: 'Diagrama de componentes y flujo de datos de la aplicació³n', en: 'Application component diagram and data flow' }
+      },
+      {
+        title: { es: 'ETL de Aprendizaje Automó¡tico', en: 'Machine Learning ETL' },
+        url: 'assets/documentos/sensai/ETL de aprendizaje automó¡tico.pdf',
+        description: { es: 'Pipeline de extracció³n, transformació³n y carga para entrenamiento', en: 'Extraction, transformation and loading pipeline for training' }
+      }
+    ],
+    demoVideos: [
+      // App demos
+      {
+        title: { es: 'Demo Ló­nea 152', en: 'Line 152 Demo' },
+        url: 'assets/videos/sensai/demo_152.mp4',
+        description: { 
+          es: 'Demostració³n de la app detectando colectivo ló­nea 152 en tiempo real', 
+          en: 'App demo detecting line 152 bus in real-time' 
+        },
+        category: 'app'
+      },
+      {
+        title: { es: 'Demo Ló­nea 324', en: 'Line 324 Demo' },
+        url: 'assets/videos/sensai/demo_324.mp4',
+        description: { 
+          es: 'Demostració³n de la app detectando colectivo ló­nea 324 en tiempo real', 
+          en: 'App demo detecting line 324 bus in real-time' 
+        },
+        category: 'app'
+      },
+      {
+        title: { es: 'Demo Ló­nea 365', en: 'Line 365 Demo' },
+        url: 'assets/videos/sensai/demo_365.mp4',
+        description: { 
+          es: 'Demostració³n de la app detectando colectivo ló­nea 365 en tiempo real', 
+          en: 'App demo detecting line 365 bus in real-time' 
+        },
+        category: 'app'
+      },
+      {
+        title: { es: 'Demo Vereda Rota', en: 'Broken Sidewalk Demo' },
+        url: 'assets/videos/sensai/demo_vereda.mp4',
+        description: { 
+          es: 'Demostració³n de la app detectando veredas en mal estado', 
+          en: 'App demo detecting sidewalks in poor condition' 
+        },
+        category: 'app'
+      },
+      // Model detection demos
+      {
+        title: { es: 'Detecció³n Colectivo 324', en: 'Bus 324 Detection' },
+        url: 'assets/videos/sensai/boxes_324.mp4',
+        description: { 
+          es: 'Visualizació³n de bounding boxes del modelo detectando colectivo 324', 
+          en: 'Bounding box visualization of model detecting bus 324' 
+        },
+        category: 'model'
+      },
+      {
+        title: { es: 'Detecció³n Peatones', en: 'Pedestrian Detection' },
+        url: 'assets/videos/sensai/boxes_person.mp4',
+        description: { 
+          es: 'Visualizació³n de bounding boxes del modelo detectando peatones', 
+          en: 'Bounding box visualization of model detecting pedestrians' 
+        },
+        category: 'model'
+      },
+      {
+        title: { es: 'Detecció³n Veredas', en: 'Sidewalk Detection' },
+        url: 'assets/videos/sensai/boxes_sidewalk.mp4',
+        description: { 
+          es: 'Visualizació³n de bounding boxes del modelo detectando daó±os en veredas', 
+          en: 'Bounding box visualization of model detecting sidewalk damage' 
+        },
+        category: 'model'
+      }
+    ],
+    gallery: [
+      {
+        title: { es: 'Tema Claro', en: 'Light Theme' },
+        images: [
+          { url: 'assets/images/sensai/tema_claro (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_claro (2).webp', caption: { es: 'Menóº de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_claro (6).webp', caption: { es: 'Menóº de Configuració³n', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_claro (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+        ]
+      },
+      {
+        title: { es: 'Tema Oscuro', en: 'Dark Theme' },
+        images: [
+          { url: 'assets/images/sensai/tema_oscuro (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_oscuro (2).webp', caption: { es: 'Menóº de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro (6).webp', caption: { es: 'Menóº de Configuració³n', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+        ]
+      },
+      {
+        title: { es: 'Alto Contraste Claro', en: 'Light High Contrast' },
+        images: [
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (2).webp', caption: { es: 'Menóº de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (6).webp', caption: { es: 'Menóº de Configuració³n', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_claro_alto_contraste (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+        ]
+      },
+      {
+        title: { es: 'Alto Contraste Oscuro', en: 'Dark High Contrast' },
+        images: [
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (0).webp', caption: { es: 'Pantalla principal', en: 'Main screen' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (2).webp', caption: { es: 'Menóº de Opciones', en: 'Options Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (6).webp', caption: { es: 'Menóº de Configuració³n', en: 'Settings Menu' } },
+          { url: 'assets/images/sensai/tema_oscuro_alto_contraste (5).webp', caption: { es: 'Pantalla de Ayuda', en: 'Help Screen' } }
+        ]
+      }
+    ],
+  },
+
+  // === Tribe - Red Social ===
+  {
+    id: 'tribe',
+    title: {
+      es: 'Tribe',
+      en: 'Tribe'
+    },
+    shortDescription: {
+      es: 'Red social mó³vil con autenticació³n biomó©trica, gamificació³n, temas dinó¡micos y soporte multilenguaje.',
+      en: 'Mobile social network with biometric authentication, gamification, dynamic themes and multilingual support.'
+    },
+    fullDescription: {
+      es: `Tribe es una aplicació³n mó³vil tipo red social completa desarrollada con React Native, con un fuerte enfoque en seguridad. La app implementa móºltiples capas de protecció³n y mejores pró¡cticas de la industria para garantizar la seguridad de los datos de los usuarios.
+
+**Arquitectura de Seguridad**
+La seguridad es el pilar fundamental de Tribe. Implementamos un sistema de defensa en profundidad que incluye: autenticació³n multifactor (MFA) con biometró­a nativa, gestió³n segura de tokens con JWT y refresh tokens, Magic Links para autenticació³n sin contraseó±a, hashing robusto con bcrypt, validació³n exhaustiva de inputs, y protecció³n contra ataques comunes (inyecció³n, XSS, CSRF).
+
+**Autenticació³n Biomó©trica**
+Integració³n nativa con los sensores biomó©tricos del dispositivo (huella dactilar y Face ID/reconocimiento facial) usando react-native-biometrics, proporcionando una capa adicional de seguridad sin sacrificar la experiencia de usuario.
+
+**Gestió³n Segura de Sesiones**
+Sistema de tokens dual: access tokens de corta duració³n (15 minutos) para operaciones y refresh tokens de larga duració³n (7 dó­as) almacenados de forma segura, con rotació³n automó¡tica y detecció³n de sesiones comprometidas.
+
+**Sistema de Gamificació³n**
+Los usuarios ganan experiencia (XP) por interacciones, suben de nivel y desbloquean logros.
+
+**Funcionalidades Core**
+Feed con publicaciones geolocalizadas, sistema de likes/favoritos, comentarios, bóºsqueda de usuarios, seguimiento social, y có¡mara moderna con Vision Camera.`,
+      en: `Tribe is a complete social network mobile application built with React Native, with a strong focus on security. The app implements multiple layers of protection and industry best practices to ensure user data security.
+
+**Security Architecture**
+Security is the fundamental pillar of Tribe. We implement a defense-in-depth system that includes: multi-factor authentication (MFA) with native biometrics, secure token management with JWT and refresh tokens, Magic Links for passwordless authentication, robust hashing with bcrypt, exhaustive input validation, and protection against common attacks (injection, XSS, CSRF).
+
+**Biometric Authentication**
+Native integration with device biometric sensors (fingerprint and Face ID/facial recognition) using react-native-biometrics, providing an additional security layer without sacrificing user experience.
+
+**Secure Session Management**
+Dual token system: short-lived access tokens (15 minutes) for operations and long-lived refresh tokens (7 days) stored securely, with automatic rotation and compromised session detection.
+
+**Gamification System**
+Users earn experience (XP) for interactions, level up and unlock achievements.
+
+**Core Features**
+Feed with geolocated posts, likes/favorites system, comments, user search, social following, and modern camera with Vision Camera.`
+    },
+    technologies: ['React Native', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Vision Camera', 'AsyncStorage'],
+    tags: ['Mobile', 'API', 'Security'],
+    imageUrl: 'assets/images/projects/tribe_logo.webp',
+    imageStyle: 'contain',
+    codeUrl: 'https://github.com/mrosariopresedo/Tribe',
+    featured: false,
+    category: 'main',
+    role: {
+      es: 'Desarrollador Mobile Full Stack',
+      en: 'Full Stack Mobile Developer'
+    },
+    duration: '8 meses',
+    team: 2,
+    highlights: {
+      es: [
+        'Autenticació³n biomó©trica nativa (huella + Face ID)',
+        'Hashing seguro con bcrypt (12 rounds de salt)',
+        'JWT con refresh tokens y rotació³n automó¡tica',
+        'Magic Links con tokens óºnicos y uso óºnico',
+        'Validació³n de inputs contra inyecció³n SQL/NoSQL',
+        'Protecció³n contra XSS y CSRF',
+        'Detecció³n de sesiones comprometidas',
+        'API REST documentada con Swagger/OpenAPI'
+      ],
+      en: [
+        'Native biometric auth (fingerprint + Face ID)',
+        'Secure hashing with bcrypt (12 salt rounds)',
+        'JWT with refresh tokens and automatic rotation',
+        'Magic Links with unique single-use tokens',
+        'Input validation against SQL/NoSQL injection',
+        'XSS and CSRF protection',
+        'Compromised session detection',
+        'REST API documented with Swagger/OpenAPI'
+      ]
+    },
+    sections: [
+      {
+        title: {
+          es: 'Autenticació³n y Seguridad',
+          en: 'Authentication & Security'
+        },
+        content: {
+          es: `El sistema de autenticació³n implementa móºltiples capas de seguridad siguiendo estó¡ndares de la industria:
+
+**Hashing de Contraseó±as**: Implementació³n de bcrypt con 12 rounds de salt, haciendo computacionalmente inviable el cracking por fuerza bruta.
+
+**JWT con Refresh Tokens**: Access tokens de corta duració³n (15 min) y refresh tokens de larga duració³n (7 dó­as) para balance entre seguridad y UX.
+
+**Biometró­a Nativa**: Integració³n con react-native-biometrics para huella dactilar y reconocimiento facial.
+
+**Magic Links**: Sistema de login sin contraseó±a que envó­a enlaces óºnicos por email con expiració³n de 15 minutos y uso óºnico.
+
+**Validació³n de Inputs**: Sanitizació³n de datos de entrada para prevenir inyecció³n SQL/NoSQL y XSS.
+
+**Manejo de Sesiones**: Detecció³n automó¡tica de tokens expirados con flujo de re-autenticació³n transparente.`,
+          en: `The authentication system implements multiple security layers following industry standards:
+
+**Password Hashing**: bcrypt implementation with 12 salt rounds, making brute force cracking computationally infeasible.
+
+**JWT with Refresh Tokens**: Short-lived access tokens (15 min) and long-lived refresh tokens (7 days) for balance between security and UX.
+
+**Native Biometrics**: Integration with react-native-biometrics for fingerprint and facial recognition.
+
+**Magic Links**: Passwordless login system that sends unique links via email with 15-minute expiration and single use.
+
+**Input Validation**: Input data sanitization to prevent SQL/NoSQL injection and XSS.
+
+**Session Management**: Automatic detection of expired tokens with transparent re-authentication flow.`
+        }
+      },
+      {
+        title: {
+          es: 'Sistema de Gamificació³n',
+          en: 'Gamification System'
+        },
+        content: {
+          es: `Tribe implementa un sistema de gamificació³n para aumentar el engagement:
+
+**Experiencia (XP)**: Los usuarios ganan puntos por cada acció³n: publicar (+50 XP), dar like (+5 XP), comentar (+10 XP), ganar seguidores (+20 XP).
+
+**Niveles**: Sistema de progresió³n con 50 niveles. Cada nivel requiere mó¡s XP que el anterior siguiendo una curva exponencial.
+
+**Logros**: Badges desbloqueables por hitos especó­ficos: "Primera publicació³n", "100 likes recibidos", "10 seguidores", etc.
+
+**Mó©tricas Personales**: Dashboard con estadó­sticas de actividad, gró¡ficos de progreso y historial de acciones.`,
+          en: `Tribe implements a gamification system to increase engagement:
+
+**Experience (XP)**: Users earn points for each action: posting (+50 XP), liking (+5 XP), commenting (+10 XP), gaining followers (+20 XP).
+
+**Levels**: Progression system with 50 levels. Each level requires more XP than the previous one following an exponential curve.
+
+**Achievements**: Unlockable badges for specific milestones: "First post", "100 likes received", "10 followers", etc.
+
+**Personal Metrics**: Dashboard with activity statistics, progress charts and action history.`
+        }
+      },
+      {
+        title: {
+          es: 'Arquitectura Tó©cnica',
+          en: 'Technical Architecture'
+        },
+        content: {
+          es: `**Frontend (React Native 0.75)**
+- Navegació³n: React Navigation con Stack y Bottom Tabs
+- Estado: Context API para User, Theme, Language y Posts
+- Estilos: StyleSheet dinó¡micos con sistema de temas
+- Componentes: Arquitectura modular con separació³n por features
+
+**Backend (Node.js/Express)**
+- API REST con rutas protegidas por JWT middleware
+- MongoDB con Mongoose para modelado de datos
+- Controladores separados: auth, users, posts, gamification
+- Validació³n de datos con express-validator`,
+          en: `**Frontend (React Native 0.75)**
+- Navigation: React Navigation with Stack and Bottom Tabs
+- State: Context API for User, Theme, Language and Posts
+- Styles: Dynamic StyleSheet with theming system
+- Components: Modular architecture with feature separation
+
+**Backend (Node.js/Express)**
+- REST API with JWT middleware protected routes
+- MongoDB with Mongoose for data modeling
+- Separated controllers: auth, users, posts, gamification
+- Data validation with express-validator`
+        }
+      }
+    ],
+    demoVideos: [
+      // === AUTENTICACIó“N Y SEGURIDAD ===
+      {
+        title: { es: 'Inicio de Sesió³n', en: 'Login Flow' },
+        url: 'assets/videos/tribe/00_inicio_sesion.mp4',
+        description: { 
+          es: 'Autenticació³n tradicional con validació³n de credenciales, JWT tokens y manejo de errores en tiempo real.', 
+          en: 'Traditional authentication with credential validation, JWT tokens and real-time error handling.' 
+        },
+        category: 'auth'
+      },
+      {
+        title: { es: 'Autenticació³n Biomó©trica', en: 'Biometric Auth' },
+        url: 'assets/videos/tribe/09_biometria.mp4',
+        description: { 
+          es: 'Login con huella dactilar o Face ID utilizando react-native-biometrics.', 
+          en: 'Fingerprint or Face ID login using react-native-biometrics.' 
+        },
+        category: 'auth'
+      },
+      {
+        title: { es: 'Cambiar Contraseó±a', en: 'Change Password' },
+        url: 'assets/videos/tribe/08_cambiar-contraseó±a.mp4',
+        description: { 
+          es: 'Flujo seguro de cambio de contraseó±a con validació³n de contraseó±a actual, requisitos de seguridad y confirmació³n visual.', 
+          en: 'Secure password change flow with current password validation, security requirements and visual confirmation.' 
+        },
+        category: 'auth'
+      },
+      // === CONTENIDO SOCIAL ===
+      {
+        title: { es: 'Feed Principal', en: 'Main Feed' },
+        url: 'assets/videos/tribe/01_feed.mp4',
+        description: { 
+          es: 'Timeline infinito con publicaciones geolocalizadas, pull-to-refresh y carga lazy loading optimizada para rendimiento.', 
+          en: 'Infinite timeline with geolocated posts, pull-to-refresh and lazy loading optimized for performance.' 
+        },
+        category: 'social'
+      },
+      {
+        title: { es: 'Detalle de Publicació³n', en: 'Post Detail' },
+        url: 'assets/videos/tribe/02_detalle-publicacion.mp4',
+        description: { 
+          es: 'Vista expandida con imagen completa, ubicació³n del post, sistema de comentarios con scroll infinito y acciones sociales.', 
+          en: 'Expanded view with full image, post location, comment system with infinite scroll and social actions.' 
+        },
+        category: 'social'
+      },
+      {
+        title: { es: 'Likes y Favoritos', en: 'Likes & Favorites' },
+        url: 'assets/videos/tribe/03_like-fav.mp4',
+        description: { 
+          es: 'Sistema dual de interacciones: likes para engagement póºblico y favoritos para guardar contenido privado. Animaciones fluidas.', 
+          en: 'Dual interaction system: likes for public engagement and favorites for private content saving. Smooth animations.' 
+        },
+        category: 'social'
+      },
+      {
+        title: { es: 'Notificaciones', en: 'Notifications' },
+        url: 'assets/videos/tribe/04_notificaciones.mp4',
+        description: { 
+          es: 'Centro de notificaciones con categoró­as: nuevos seguidores, likes, comentarios y menciones. Marcado como leó­do individual o masivo.', 
+          en: 'Notification center with categories: new followers, likes, comments and mentions. Individual or bulk mark as read.' 
+        },
+        category: 'social'
+      },
+      {
+        title: { es: 'Crear Publicació³n', en: 'Create Post' },
+        url: 'assets/videos/tribe/16_subir.mp4',
+        description: { 
+          es: 'Flujo completo de creació³n: captura/selecció³n de imagen, aó±adir descripció³n, geolocalizació³n automó¡tica y publicació³n.', 
+          en: 'Complete creation flow: image capture/selection, add description, automatic geolocation and publishing.' 
+        },
+        category: 'social'
+      },
+      {
+        title: { es: 'Bóºsqueda de Usuarios', en: 'User Search' },
+        url: 'assets/videos/tribe/17_buscar.mp4',
+        description: { 
+          es: 'Bóºsqueda en tiempo real con debounce, resultados filtrados, preview de perfil y acció³n de seguir directa.', 
+          en: 'Real-time search with debounce, filtered results, profile preview and direct follow action.' 
+        },
+        category: 'social'
+      },
+      // === PERFIL Y GAMIFICACIó“N ===
+      {
+        title: { es: 'Perfil de Usuario', en: 'User Profile' },
+        url: 'assets/videos/tribe/10_perfil-de-usuario.mp4',
+        description: { 
+          es: 'Vista completa del perfil: avatar, portada, bio, estadó­sticas (posts, seguidores, siguiendo), grid de publicaciones y nivel de XP.', 
+          en: 'Complete profile view: avatar, cover, bio, stats (posts, followers, following), posts grid and XP level.' 
+        },
+        category: 'profile'
+      },
+      {
+        title: { es: 'Mó©tricas Personales', en: 'Personal Metrics' },
+        url: 'assets/videos/tribe/05_metricas.mp4',
+        description: { 
+          es: 'Dashboard analó­tico con estadó­sticas de actividad, gró¡ficos de engagement, historial de acciones y tendencias de crecimiento.', 
+          en: 'Analytics dashboard with activity stats, engagement charts, action history and growth trends.' 
+        },
+        category: 'profile'
+      },
+      {
+        title: { es: 'Sistema de Gamificació³n', en: 'Gamification System' },
+        url: 'assets/videos/tribe/11_gamificacion.mp4',
+        description: { 
+          es: 'Progresió³n RPG: XP por acciones (publicar +50, comentar +10, likes +5), 50 niveles con curva exponencial, badges desbloqueables.', 
+          en: 'RPG progression: XP for actions (post +50, comment +10, likes +5), 50 levels with exponential curve, unlockable badges.' 
+        },
+        category: 'profile'
+      },
+      // === CONFIGURACIó“N Y PERSONALIZACIó“N ===
+      {
+        title: { es: 'Configuració³n de Cuenta', en: 'Account Settings' },
+        url: 'assets/videos/tribe/06_opciones-cuenta.mp4',
+        description: { 
+          es: 'Panel de configuració³n organizado por secciones: perfil, seguridad, apariencia, idioma y notificaciones.', 
+          en: 'Settings panel organized by sections: profile, security, appearance, language and notifications.' 
+        },
+        category: 'settings'
+      },
+      {
+        title: { es: 'Cambiar Imó¡genes', en: 'Change Images' },
+        url: 'assets/videos/tribe/07_opciones-cuenta-cambiar-imagenes-personales.mp4',
+        description: { 
+          es: 'Personalizació³n visual: cambio de avatar y foto de portada desde galeró­a o có¡mara, con preview y crop integrado.', 
+          en: 'Visual customization: avatar and cover photo change from gallery or camera, with integrated preview and crop.' 
+        },
+        category: 'settings'
+      },
+      {
+        title: { es: 'Cambio de Tema', en: 'Theme Switching' },
+        url: 'assets/videos/tribe/12_cambio-tema.mp4',
+        description: { 
+          es: 'Alternancia fluida entre tema claro y oscuro con transiciones suaves. Preferencia persistida en AsyncStorage.', 
+          en: 'Smooth toggle between light and dark themes with soft transitions. Preference persisted in AsyncStorage.' 
+        },
+        category: 'settings'
+      },
+      {
+        title: { es: 'Cambio de Idioma', en: 'Language Switch' },
+        url: 'assets/videos/tribe/13_cambio-idioma.mp4',
+        description: { 
+          es: 'Internacionalizació³n (i18n) con cambio en tiempo real sin reinicio de la app. Soporte para espaó±ol e ingló©s.', 
+          en: 'Internationalization (i18n) with real-time switching without app restart. Spanish and English support.' 
+        },
+        category: 'settings'
+      },
+      {
+        title: { es: 'Demo Idioma Ingló©s - Inicio', en: 'English Demo - Home' },
+        url: 'assets/videos/tribe/14_cambio-idioma-pagina-inicio-ingles.mp4',
+        description: { 
+          es: 'Demostració³n de la pantalla de inicio completamente traducida al ingló©s, mostrando la cobertura total de traducciones.', 
+          en: 'Demonstration of the home screen fully translated to English, showing complete translation coverage.' 
+        },
+        category: 'settings'
+      },
+      {
+        title: { es: 'Demo Idioma Ingló©s - Config', en: 'English Demo - Settings' },
+        url: 'assets/videos/tribe/15_cambio-idioma-conf-usuario-ingles.mp4',
+        description: { 
+          es: 'Pantalla de configuració³n en ingló©s, demostrando que todos los textos estó¡n correctamente traducidos.', 
+          en: 'Settings screen in English, demonstrating that all texts are correctly translated.' 
+        },
+        category: 'settings'
+      }
+    ],
+    links: [
+      { label: { es: 'API Docs (Swagger)', en: 'API Docs (Swagger)' }, url: 'https://github.com/mrosariopresedo/Tribe/blob/main/TribeBackend/docs/swagger.yaml', type: 'docs' }
+    ]
+  },
+
+  // === MoodFlix - Buscador de Peló­culas ===
+  {
+    id: 'moodflix',
+    title: {
+      es: 'MoodFlix',
+      en: 'MoodFlix'
+    },
+    shortDescription: {
+      es: 'Plataforma web de descubrimiento cinematogró¡fico con playlists personalizadas, trailers y sistema de recomendaciones.',
+      en: 'Web platform for movie discovery with personalized playlists, trailers and recommendation system.'
+    },
+    fullDescription: {
+      es: `MoodFlix es una plataforma diseó±ada para ayudarte a encontrar quó© ver cuando no estó¡s seguro. Desarrollada como proyecto de la materia Aplicaciones Interactivas en UADE.
+
+**Descubrimiento Inteligente**
+Bóºsqueda avanzada con filtros por gó©nero, aó±o, rating y plataforma de streaming. El sistema muestra dó³nde estó¡ disponible cada peló­cula (Netflix, Amazon Prime, Disney+, etc.).
+
+**Playlists Personalizadas**
+Creó¡ y gestionó¡ tus propias listas de peló­culas. Marcó¡ peló­culas como "vistas", agregó¡ a favoritos, y organizó¡ tu watchlist a tu manera.
+
+**Informació³n Completa**
+Cada peló­cula incluye sinopsis, rating con estrellas, aó±o de lanzamiento, trailer embebido de YouTube, y plataformas de streaming disponibles.
+
+**Sistema de Usuarios**
+Registro, login y persistencia de datos. Tus playlists y preferencias se guardan en tu cuenta para acceder desde cualquier dispositivo.
+
+**Interfaz Moderna**
+UI con gradientes póºrpura/rosa, animaciones fluidas, diseó±o responsive y notificaciones con sonido para feedback inmediato.`,
+      en: `MoodFlix is a platform designed to help you find what to watch when you're not sure. Developed as a project for the Interactive Applications course at UADE.
+
+**Smart Discovery**
+Advanced search with filters by genre, year, rating and streaming platform. The system shows where each movie is available (Netflix, Amazon Prime, Disney+, etc.).
+
+**Personalized Playlists**
+Create and manage your own movie lists. Mark movies as "watched", add to favorites, and organize your watchlist your way.
+
+**Complete Information**
+Each movie includes synopsis, star rating, release year, embedded YouTube trailer, and available streaming platforms.
+
+**User System**
+Registration, login and data persistence. Your playlists and preferences are saved to your account for access from any device.
+
+**Modern Interface**
+UI with purple/pink gradients, smooth animations, responsive design and sound notifications for immediate feedback.`
+    },
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'Material UI', 'Node.js', 'Express', 'MongoDB', 'JWT', 'TMDB API', 'Axios'],
+    tags: ['Web', 'API'],
+    imageUrl: 'assets/images/projects/moodflix_logo.webp',
+    imageStyle: 'contain',
+    videoUrl: 'assets/videos/moodflix-demo.mp4',
+    videoFormat: 'desktop',
+    codeUrl: 'https://github.com/mrosariopresedo/APIS',
+    featured: false,
+    category: 'main',
+    role: {
+      es: 'Desarrollador Full Stack',
+      en: 'Full Stack Developer'
+    },
+    duration: '4 meses',
+    team: 4,
+    highlights: {
+      es: [
+        'Integració³n completa con The Movie Database API',
+        'Sistema CRUD de playlists con persistencia en MongoDB',
+        'Autenticació³n JWT con cookies seguras',
+        'Visualizació³n de trailers de YouTube embebidos',
+        'Filtrado por plataformas de streaming (Netflix, Prime, Disney+)',
+        'Notificaciones con feedback de sonido',
+        'Diseó±o responsive con gradientes y animaciones'
+      ],
+      en: [
+        'Full integration with The Movie Database API',
+        'Playlist CRUD system with MongoDB persistence',
+        'JWT authentication with secure cookies',
+        'Embedded YouTube trailer viewing',
+        'Filtering by streaming platforms (Netflix, Prime, Disney+)',
+        'Notifications with sound feedback',
+        'Responsive design with gradients and animations'
+      ]
+    },
+    sections: [
+      {
+        title: {
+          es: 'Arquitectura del Sistema',
+          en: 'System Architecture'
+        },
+        content: {
+          es: `El proyecto sigue una arquitectura cliente-servidor con separació³n clara de responsabilidades:
+
+**Frontend (React + Vite)**
+â€¢ Context API para estado global (sesió³n, playlists, bóºsqueda)
+â€¢ Componentes reutilizables con Material UI y Tailwind
+â€¢ Routing con React Router
+â€¢ Axios para comunicació³n con backend
+
+**Backend (Node.js + Express)**
+â€¢ API RESTful con endpoints para usuarios, peló­culas y playlists
+â€¢ Autenticació³n con JWT almacenado en cookies HttpOnly
+â€¢ Mongoose para modelado de datos en MongoDB
+â€¢ Proxy a TMDB API para datos de peló­culas`,
+          en: `The project follows a client-server architecture with clear separation of concerns:
+
+**Frontend (React + Vite)**
+â€¢ Context API for global state (session, playlists, search)
+â€¢ Reusable components with Material UI and Tailwind
+â€¢ Routing with React Router
+â€¢ Axios for backend communication
+
+**Backend (Node.js + Express)**
+â€¢ RESTful API with endpoints for users, movies and playlists
+â€¢ JWT authentication stored in HttpOnly cookies
+â€¢ Mongoose for MongoDB data modeling
+â€¢ TMDB API proxy for movie data`
+        }
+      }
+    ],
+    demoVideos: [
+      // Landing & Auth
+      {
+        title: { es: 'Landing Page', en: 'Landing Page' },
+        url: 'assets/videos/moodflix/00_landing_effect.mp4',
+        description: { 
+          es: 'Efecto visual de la pó¡gina de inicio con animaciones CSS y diseó±o responsive', 
+          en: 'Visual effect of landing page with CSS animations and responsive design' 
+        },
+        category: 'landing'
+      },
+      {
+        title: { es: 'Login Flow', en: 'Login Flow' },
+        url: 'assets/videos/moodflix/01_login_flow.mp4',
+        description: { 
+          es: 'Flujo de inicio de sesió³n con manejo de formularios, tokens y feedback toast', 
+          en: 'Login flow with form handling, tokens and toast feedback' 
+        },
+        category: 'landing'
+      },
+      {
+        title: { es: 'Navegació³n Home', en: 'Home Navigation' },
+        url: 'assets/videos/moodflix/10_nav_home_logo.mp4',
+        description: { 
+          es: 'Navegació³n ró¡pida al home mediante click en logo, limpieza de estado', 
+          en: 'Quick navigation to home via logo click, state cleanup' 
+        },
+        category: 'landing'
+      },
+      // Discovery
+      {
+        title: { es: 'Probar Suerte', en: 'Try Your Luck' },
+        url: 'assets/videos/moodflix/02_try_luck_feature.mp4',
+        description: { 
+          es: 'Feature principal de descubrimiento aleatorio con skeleton loading y renderizado dinó¡mico', 
+          en: 'Main random discovery feature with skeleton loading and dynamic rendering' 
+        },
+        category: 'discovery'
+      },
+      // Playlist Management
+      {
+        title: { es: 'Vista de Playlists', en: 'Playlists View' },
+        url: 'assets/videos/moodflix/03_playlist_scroll.mp4',
+        description: { 
+          es: 'Vista de playlists con scroll optimizado y componentes interactivos', 
+          en: 'Playlists view with optimized scroll and interactive components' 
+        },
+        category: 'playlist'
+      },
+      {
+        title: { es: 'Editar Playlist', en: 'Edit Playlist' },
+        url: 'assets/videos/moodflix/04_crud_edit_playlist.mp4',
+        description: { 
+          es: 'CRUD de playlists: editar y renombrar con modal y feedback asó­ncrono', 
+          en: 'Playlist CRUD: edit and rename with modal and async feedback' 
+        },
+        category: 'playlist'
+      },
+      {
+        title: { es: 'Agregar a Lista', en: 'Add to List' },
+        url: 'assets/videos/moodflix/09_crud_add_to_list.mp4',
+        description: { 
+          es: 'Agregar peló­culas a listas con feedback visual y sonoro', 
+          en: 'Add movies to lists with visual and sound feedback' 
+        },
+        category: 'playlist'
+      },
+      // Detail
+      {
+        title: { es: 'Detalle de Peló­cula', en: 'Movie Detail' },
+        url: 'assets/videos/moodflix/05_movie_detail_modal.mp4',
+        description: { 
+          es: 'Modal de detalle con rating, sinopsis y datos completos', 
+          en: 'Detail modal with rating, synopsis and complete data' 
+        },
+        category: 'detail'
+      },
+      {
+        title: { es: 'Reproducir Trailer', en: 'Play Trailer' },
+        url: 'assets/videos/moodflix/06_play_trailer.mp4',
+        description: { 
+          es: 'Integració³n de YouTube iframe para reproducció³n de trailers', 
+          en: 'YouTube iframe integration for trailer playback' 
+        },
+        category: 'detail'
+      },
+      // Search
+      {
+        title: { es: 'Bóºsqueda en Vivo', en: 'Live Search' },
+        url: 'assets/videos/moodflix/07_live_search.mp4',
+        description: { 
+          es: 'Bóºsqueda dinó¡mica con debounce para performance ó³ptima', 
+          en: 'Dynamic search with debounce for optimal performance' 
+        },
+        category: 'search'
+      },
+      {
+        title: { es: 'Filtro por Gó©nero', en: 'Genre Filter' },
+        url: 'assets/videos/moodflix/08_genre_filter.mp4',
+        description: { 
+          es: 'Sidebar con filtrado complejo por gó©neros y estado global', 
+          en: 'Sidebar with complex genre filtering and global state' 
+        },
+        category: 'search'
+      }
+    ],
+    diagrams: [
+      {
+        title: { es: 'Arquitectura del Sistema', en: 'System Architecture' },
+        url: 'assets/documentos/moodflix/diagrama_moodflix.pdf',
+        description: { es: 'Diagrama de arquitectura cliente-servidor', en: 'Client-server architecture diagram' }
+      },
+      {
+        title: { es: 'API Endpoints', en: 'API Endpoints' },
+        url: 'assets/documentos/moodflix/peticiones-y-respuestas-endpoints-moodflix.pdf',
+        description: { es: 'Documentació³n de peticiones y respuestas de la API', en: 'API requests and responses documentation' }
+      }
+    ]
+  },
+
+  // === Marketplace - Microservicios ===
+  {
+    id: 'marketplace',
+    title: {
+      es: 'Marketplace - deliver.ar',
+      en: 'Marketplace - deliver.ar'
+    },
+    team: 6,
+    duration: '4 meses',
+    shortDescription: {
+      es: 'Mó³dulo de marketplace para plataforma de delivery con arquitectura de microservicios e IaC.',
+      en: 'Marketplace module for delivery platform with microservices architecture and IaC.'
+    },
+    fullDescription: {
+      es: `Componente de Marketplace dentro de una arquitectura de microservicios para una plataforma de pedidos de comida (deliver.ar). El mó³dulo permite a los clientes acceder a productos y promociones de móºltiples comercios registrados (tenants).
+
+**Portal de Administració³n de Tenants (PAT)**
+Aplicació³n web dedicada para que los proveedores autogestionen sus cató¡logos:
+â€¢ CRUD completo de productos
+â€¢ Gestió³n de cató¡logos y promociones
+â€¢ Control de precios, disponibilidad y stock
+â€¢ Dashboard con mó©tricas de desempeó±o
+
+**Aspectos tó©cnicos destacados:**
+â€¢ APIs REST para integració³n con otros mó³dulos (Cliente, Deliver, Backoffice, BI)
+â€¢ Sistema de eventos para mensajeró­a y anó¡lisis
+â€¢ Infraestructura como Có³digo (IaC) con Terraform
+â€¢ Arquitectura escalable y modular`,
+      en: `Marketplace component within a microservices architecture for a food ordering platform (deliver.ar). The module allows customers to access products and promotions from multiple registered businesses (tenants).
+
+**Tenant Administration Portal (PAT)**
+Dedicated web application for providers to self-manage their catalogs:
+â€¢ Complete product CRUD
+â€¢ Catalog and promotion management
+â€¢ Price, availability and stock control
+â€¢ Dashboard with performance metrics
+
+**Technical highlights:**
+â€¢ REST APIs for integration with other modules (Client, Deliver, Backoffice, BI)
+â€¢ Event system for messaging and analytics
+â€¢ Infrastructure as Code (IaC) with Terraform
+â€¢ Scalable and modular architecture`
+    },
+    technologies: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Terraform', 'AWS'],
+    tags: ['Web', 'API', 'Cloud', 'IaC'],
+    imageUrl: 'https://cdn-icons-png.flaticon.com/512/2331/2331970.webp',
+    imageStyle: 'contain',
+    codeUrl: 'https://github.com/juani8/marketplace-services',
+    featured: false,
+    category: 'cloud',
+    role: {
+      es: 'Desarrollador Full-Stack & DevOps',
+      en: 'Full-Stack Developer & DevOps'
+    },
+    highlights: {
+      es: [
+        'Arquitectura de microservicios escalable',
+        'Infrastructure as Code con Terraform',
+        'APIs REST documentadas con OpenAPI',
+        'Integració³n con móºltiples mó³dulos del ecosistema',
+        'Portal de autogestió³n para tenants'
+      ],
+      en: [
+        'Scalable microservices architecture',
+        'Infrastructure as Code with Terraform',
+        'REST APIs documented with OpenAPI',
+        'Integration with multiple ecosystem modules',
+        'Self-management portal for tenants'
+      ]
+    },
+    sections: [
+      {
+        title: {
+          es: 'Infrastructure as Code (IaC)',
+          en: 'Infrastructure as Code (IaC)'
+        },
+        content: {
+          es: `La infraestructura del proyecto estó¡ completamente definida como có³digo usando Terraform, lo que permite:
+
+â€¢ **Reproducibilidad**: Despliegue consistente en cualquier ambiente
+â€¢ **Versionado**: Control de cambios en la infraestructura
+â€¢ **Automatizació³n**: CI/CD para provisionar recursos
+â€¢ **Documentació³n viva**: El có³digo es la documentació³n
+
+Recursos gestionados:
+- VPC y subnets
+- Instancias EC2 / ECS
+- RDS PostgreSQL
+- Load Balancers
+- Security Groups
+- IAM Roles y Policies`,
+          en: `The project infrastructure is fully defined as code using Terraform, which allows:
+
+â€¢ **Reproducibility**: Consistent deployment in any environment
+â€¢ **Versioning**: Infrastructure change control
+â€¢ **Automation**: CI/CD to provision resources
+â€¢ **Living documentation**: Code is documentation
+
+Managed resources:
+- VPC and subnets
+- EC2 / ECS instances
+- RDS PostgreSQL
+- Load Balancers
+- Security Groups
+- IAM Roles and Policies`
+        }
+      }
+    ],
+    links: [
+      { label: { es: 'Backend Services', en: 'Backend Services' }, url: 'https://github.com/juani8/marketplace-services', type: 'github' },
+      { label: { es: 'Infrastructure as Code', en: 'Infrastructure as Code' }, url: 'https://github.com/juani8/marketplace-infrastructure-as-code', type: 'github' }
+    ]
+  }
+];
+
+// ============================================
+// FUNCIONES HELPER
+// ============================================
+
+/**
+ * Obtiene todos los proyectos
+ */
+export function getAllProjects(): Project[] {
+  return PROJECTS;
+}
+
+/**
+ * Obtiene proyectos destacados
+ */
+export function getFeaturedProjects(): Project[] {
+  return PROJECTS.filter(p => p.featured);
+}
+
+/**
+ * Obtiene proyectos por categoró­a
+ */
+export function getProjectsByCategory(category: Project['category']): Project[] {
+  return PROJECTS.filter(p => p.category === category);
+}
+
+/**
+ * Obtiene proyectos por tag
+ */
+export function getProjectsByTag(tag: ProjectTag): Project[] {
+  return PROJECTS.filter(p => p.tags.includes(tag));
+}
+
+/**
+ * Obtiene un proyecto por ID
+ */
+export function getProjectById(id: string): Project | undefined {
+  return PROJECTS.find(p => p.id === id);
+}
