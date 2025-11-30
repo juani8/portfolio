@@ -115,8 +115,8 @@ export const EXPERIENCES: Experience[] = [
       en: 'Delivery Manager Jr.'
     },
     description: {
-      es: 'Coordinación y seguimiento de proyectos tecnológicos para el sector financiero. Gestión de equipos de desarrollo, control de cronogramas y aseguramiento de entregas de calidad. Comunicación con stakeholders y resolución de impedimentos para garantizar el cumplimiento de objetivos.',
-      en: 'Coordination and tracking of technology projects for the financial sector. Management of development teams, schedule control, and quality delivery assurance. Stakeholder communication and impediment resolution to ensure objective fulfillment.'
+      es: 'Coordinación y seguimiento de <strong>proyectos tecnológicos</strong> para el sector financiero. Gestión de equipos de desarrollo, control de cronogramas y aseguramiento de entregas de calidad. Comunicación con <strong>stakeholders</strong> y resolución de impedimentos para garantizar el cumplimiento de objetivos.',
+      en: 'Coordination and tracking of <strong>technology projects</strong> for the financial sector. Management of development teams, schedule control, and quality delivery assurance. <strong>Stakeholder</strong> communication and impediment resolution to ensure objective fulfillment.'
     },
     startDate: '2024-11',
     endDate: null,
@@ -131,8 +131,8 @@ export const EXPERIENCES: Experience[] = [
       en: 'Information Security Intern'
     },
     description: {
-      es: 'Enfocado en tareas de cumplimiento y gobierno, colaborando en auditorías internas y externas, procesos de certificación como PCI-DSS, y la definición de controles, matrices de roles y políticas basadas en Active Directory. Ese trabajo me permitió adquirir una visión sólida de controles y estándares, además de interactuar con equipos técnicos para la evaluación de evidencias, hardening y vulnerabilidades.',
-      en: 'Focused on compliance and governance tasks, collaborating on internal and external audits, certification processes such as PCI-DSS, and the definition of controls, role matrices, and policies based on Active Directory. This work allowed me to build a solid understanding of security controls and industry standards, while also engaging with technical teams on evidence evaluation, hardening activities, and vulnerability assessments.'
+      es: 'Enfocado en tareas de <strong>cumplimiento y gobierno</strong>, colaborando en auditorías internas y externas, procesos de certificación como <strong>PCI-DSS</strong>, y la definición de controles, matrices de roles y políticas basadas en Active Directory. Adquirí una visión sólida de controles y estándares, interactuando con equipos técnicos para evaluación de evidencias, <strong>hardening</strong> y vulnerabilidades.',
+      en: 'Focused on <strong>compliance and governance</strong> tasks, collaborating on internal and external audits, certification processes such as <strong>PCI-DSS</strong>, and the definition of controls, role matrices, and policies based on Active Directory. Built a solid understanding of security controls and industry standards, engaging with technical teams on evidence evaluation, <strong>hardening</strong> activities, and vulnerability assessments.'
     },
     startDate: '2023-05',
     endDate: '2024-11',
@@ -147,8 +147,8 @@ export const EXPERIENCES: Experience[] = [
       en: 'Business Intelligence Intern'
     },
     description: {
-      es: 'Diseño y ejecución de procesos ETL, participando en la integración, depuración y modelado de datos para soluciones analíticas. Complementé estas tareas con análisis exploratorio y visualización de datos en Python, desarrollando reportes estratégicos y pipelines. Además, consolidé mi interés en roles más técnicos orientados a Data Engineering y Machine Learning.',
-      en: 'Design and execution of ETL processes, contributing to data integration, cleansing, and modeling for analytical solutions. I complemented these tasks with exploratory analysis and data visualization in Python, developing strategic reports and reproducible pipelines. Additionally, this experience strengthened my interest in pursuing more technical roles focused on Data Engineering and Machine Learning.'
+      es: 'Diseño y ejecución de <strong>procesos ETL</strong>, participando en la integración, depuración y modelado de datos para soluciones analíticas. Complementé con <strong>análisis exploratorio</strong> y visualización de datos en Python, desarrollando reportes estratégicos y pipelines reproducibles. Consolidé mi interés en <strong>Data Engineering</strong> y Machine Learning.',
+      en: 'Design and execution of <strong>ETL processes</strong>, contributing to data integration, cleansing, and modeling for analytical solutions. Complemented with <strong>exploratory analysis</strong> and data visualization in Python, developing strategic reports and reproducible pipelines. Strengthened my interest in <strong>Data Engineering</strong> and Machine Learning.'
     },
     startDate: '2022-07',
     endDate: '2023-05',
@@ -170,8 +170,8 @@ export const EDUCATION: Education[] = [
       en: 'Computer Engineering'
     },
     description: {
-      es: 'Carrera de grado enfocada en desarrollo de software, sistemas de información, inteligencia artificial y arquitectura de computadoras. 45 materias completadas.',
-      en: 'Undergraduate degree focused on software development, information systems, artificial intelligence, and computer architecture. 45 courses completed.'
+      es: 'Carrera de grado enfocada en <strong>desarrollo de software</strong>, sistemas de información, <strong>inteligencia artificial</strong> y arquitectura de computadoras. 45 materias completadas.',
+      en: 'Undergraduate degree focused on <strong>software development</strong>, information systems, <strong>artificial intelligence</strong>, and computer architecture. 45 courses completed.'
     },
     startDate: '2020',
     endDate: null,
@@ -185,8 +185,8 @@ export const EDUCATION: Education[] = [
       en: 'Systems Analyst'
     },
     description: {
-      es: 'Título intermedio con formación en análisis, diseño y desarrollo de sistemas informáticos.',
-      en: 'Intermediate degree with training in analysis, design, and development of computer systems.'
+      es: 'Título intermedio con formación en <strong>análisis, diseño y desarrollo</strong> de sistemas informáticos.',
+      en: 'Intermediate degree with training in <strong>analysis, design, and development</strong> of computer systems.'
     },
     startDate: '2020',
     endDate: '2023',
@@ -263,9 +263,14 @@ export const SKILLS: Skill[] = [
 // ============================================
 
 export function getSkillsByCategory(category: Skill['category']): Skill[] {
-  return SKILLS.filter(s => s.category === category).sort((a, b) => b.level - a.level);
+  return SKILLS
+    .filter(s => s.category === category && s.name && s.name.trim() !== '')
+    .sort((a, b) => b.level - a.level);
 }
 
 export function getTopSkills(limit: number = 8): Skill[] {
-  return [...SKILLS].sort((a, b) => b.level - a.level).slice(0, limit);
+  return [...SKILLS]
+    .filter(s => s.name && s.name.trim() !== '')
+    .sort((a, b) => b.level - a.level)
+    .slice(0, limit);
 }

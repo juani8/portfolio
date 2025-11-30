@@ -46,7 +46,7 @@ import {
                       </span>
                     </div>
                     <p class="timeline-company">{{ exp.company }}</p>
-                    <p class="timeline-description">{{ exp.description[t.lang()] }}</p>
+                    <p class="timeline-description" [innerHTML]="exp.description[t.lang()]"></p>
                     <div class="timeline-techs">
                       @for (tech of exp.technologies; track tech) {
                         <span class="tech-tag">{{ tech }}</span>
@@ -81,7 +81,7 @@ import {
                       </span>
                     </div>
                     <p class="timeline-company">{{ edu.institution }}</p>
-                    <p class="timeline-description">{{ edu.description[t.lang()] }}</p>
+                    <p class="timeline-description" [innerHTML]="edu.description[t.lang()]"></p>
                     @if (edu.status === 'in-progress') {
                       <span class="status-badge in-progress">{{ t.t('about.inProgress') }}</span>
                     }
@@ -186,7 +186,9 @@ import {
                   <span class="tag-group-label">Tools</span>
                   <div class="skill-tags">
                     @for (skill of toolSkills; track skill.name) {
-                      <span class="skill-tag">{{ skill.name }}</span>
+                      @if (skill.name && skill.name.trim()) {
+                        <span class="skill-tag">{{ skill.name }}</span>
+                      }
                     }
                   </div>
                 </div>

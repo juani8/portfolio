@@ -45,8 +45,9 @@ import { TranslationService } from '../../../core/services/translation.service';
 
           <!-- Language Switcher -->
           <button class="lang-switcher" (click)="toggleLanguage()" [title]="t.lang() === 'es' ? 'Switch to English' : 'Cambiar a Español'">
-            <span class="lang-flag">{{ t.lang() === 'es' ? '🇬🇧' : '🇪🇸' }}</span>
-            <span class="lang-text">{{ t.lang() === 'es' ? 'EN' : 'ES' }}</span>
+            <span class="lang-flag" [innerHTML]="t.lang() === 'es' ? flagES : flagEN"></span>
+            <span class="lang-text">{{ t.lang() === 'es' ? 'ES' : 'EN' }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lang-arrow"><path d="M7 10l5 5 5-5"/></svg>
           </button>
         </div>
 
@@ -168,7 +169,24 @@ import { TranslationService } from '../../../core/services/translation.service';
     }
 
     .lang-flag {
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      
+      :host ::ng-deep svg {
+        display: block;
+        border-radius: 2px;
+        box-shadow: 0 0 1px rgba(0,0,0,0.3);
+      }
+    }
+    
+    .lang-arrow {
+      opacity: 0.6;
+      transition: transform var(--transition-fast);
+    }
+    
+    .lang-switcher:hover .lang-arrow {
+      transform: rotate(180deg);
     }
 
     .menu-toggle {
@@ -273,6 +291,10 @@ export class NavbarComponent {
   
   isScrolled = signal(false);
   isMenuOpen = signal(false);
+
+  // SVG flags for better cross-platform rendering
+  flagES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="20" height="15"><path fill="#c60b1e" d="M0 0h640v480H0z"/><path fill="#ffc400" d="M0 120h640v240H0z"/></svg>`;
+  flagEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="20" height="15"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z"/><path fill="#C8102E" d="m424 281 216 159v40L369 281zm-184 20 6 35L54 480H0zM640 0v3L391 191l2-44L590 0zM0 0l239 176h-60L0 42z"/><path fill="#FFF" d="M241 0v480h160V0zM0 160v160h640V160z"/><path fill="#C8102E" d="M0 193v96h640v-96zM273 0v480h96V0z"/></svg>`;
 
   @HostListener('window:scroll')
   onScroll(): void {

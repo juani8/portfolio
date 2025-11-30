@@ -111,13 +111,21 @@ export const PROJECTS: Project[] = [
       en: 'Mobile assistance app for visually impaired people using computer vision and AI. Detects pedestrians, broken sidewalks and buses in real-time.'
     },
     introDescription: {
-      es: `Este proyecto representa un **ciclo completo de desarrollo de Machine Learning**: desde la investigación con usuarios y recolección de datos en campo, hasta el entrenamiento de modelos personalizados y su despliegue en dispositivos móviles. Se construyeron **3 modelos de detección de objetos** entrenados con datasets propios (~2400 imágenes etiquetadas manualmente), optimizados para inferencia en tiempo real (~50ms por frame) sin conexión a internet.`,
-      en: `This project represents a **complete Machine Learning development cycle**: from user research and field data collection, to training custom models and deploying them on mobile devices. **3 object detection models** were built, trained with proprietary datasets (~2400 manually labeled images), optimized for real-time inference (~50ms per frame) without internet connection.`
+      es: `Este proyecto representa un **ciclo completo de desarrollo de Machine Learning**: desde la investigación con usuarios y recolección de datos en campo, hasta el entrenamiento de modelos personalizados y su despliegue en dispositivos móviles. Se construyeron **3 modelos de detección de objetos** entrenados con datasets propios (~2400 imágenes etiquetadas manualmente), optimizados para inferencia en tiempo real (~50ms por frame) sin conexión a internet.
+
+El proceso incluyó un **análisis exhaustivo de métricas** (mAP, precisión, recall, matrices de confusión) y comportamiento de los modelos en distintos escenarios, permitiendo **iterar sobre los entrenamientos** hasta lograr un modelo con comportamiento listo para producción.
+
+**¿Qué hace la app?** SensAi utiliza la cámara del celular para detectar en tiempo real peatones, veredas en mal estado y colectivos de líneas específicas (324, 152, 365), alertando al usuario mediante voz y vibración. Todo el procesamiento ocurre en el dispositivo, sin necesidad de conexión a internet.`,
+      en: `This project represents a **complete Machine Learning development cycle**: from user research and field data collection, to training custom models and deploying them on mobile devices. **3 object detection models** were built, trained with proprietary datasets (~2400 manually labeled images), optimized for real-time inference (~50ms per frame) without internet connection.
+
+The process included **exhaustive metrics analysis** (mAP, precision, recall, confusion matrices) and model behavior evaluation across different scenarios, enabling **iteration over training runs** until achieving production-ready model behavior.
+
+**What does the app do?** SensAi uses the phone's camera to detect pedestrians, damaged sidewalks, and specific bus lines (324, 152, 365) in real-time, alerting the user through voice and vibration. All processing happens on-device, without internet connection.`
     },
     fullDescription: {
       es: `SensAi es una aplicación Android que utiliza **Machine Learning y Visión por Computadora** para asistir a personas con discapacidad visual en el Área Metropolitana de Buenos Aires (AMBA). El nombre surge de la combinación entre "sensei" (maestro o guía en japonés) y "AI" (Inteligencia Artificial): un "maestro de los sentidos" que acompaña y potencia la percepción de los usuarios.
 
-**Arquitectura de Machine Learning**
+### Arquitectura de Machine Learning
 
 El núcleo de SensAi son **3 modelos de detección de objetos personalizados** optimizados para inferencia móvil:
 
@@ -127,7 +135,7 @@ El núcleo de SensAi son **3 modelos de detección de objetos personalizados** o
 
 Cada modelo fue entrenado con datasets propios recolectados específicamente en el entorno urbano del AMBA, totalizando aproximadamente **2400 imágenes etiquetadas manualmente** con Label Studio.
 
-**Pipeline de ML End-to-End**
+### Pipeline de ML End-to-End
 
 El proyecto abarca el ciclo completo de un sistema de ML en producción:
 
@@ -137,21 +145,20 @@ El proyecto abarca el ciclo completo de un sistema de ML en producción:
 4. **Optimización**: Conversión a ONNX con NMS integrado para reducir latencia
 5. **Deployment**: Integración con ONNX Runtime en Android para inferencia en dispositivo
 
-**Valor del ML en este Caso de Uso**
+### Valor del ML en este Caso de Uso
 
 La aplicación de técnicas de Deep Learning permite resolver problemas que serían imposibles con programación tradicional:
 
 • **Generalización**: Los modelos detectan obstáculos en escenarios nunca vistos durante el entrenamiento
 • **Tiempo Real**: Inferencia de ~50ms por frame permite alertas instantáneas al usuario
-• **Sin Internet**: El procesamiento on-device garantiza funcionamiento offline y disponibilidad
 • **Adaptabilidad**: Los modelos pueden re-entrenarse con nuevos datos para mejorar precisión
 
-**Investigación con Usuarios**
+### Investigación con Usuarios
 
 Se realizaron entrevistas semiestructuradas a 7 personas con distintos grados de discapacidad visual. Los hallazgos definieron las detecciones prioritarias: personas como principal obstáculo, veredas en mal estado como segundo problema más reportado, y la necesidad de identificar colectivos en paradas concurridas.`,
       en: `SensAi is an Android application that uses **Machine Learning and Computer Vision** to assist visually impaired people in the Buenos Aires Metropolitan Area (AMBA). The name comes from combining "sensei" (teacher or guide in Japanese) and "AI" (Artificial Intelligence): a "master of the senses" that accompanies and enhances users' perception.
 
-**Machine Learning Architecture**
+### Machine Learning Architecture
 
 The core of SensAi consists of **3 custom object detection models** optimized for mobile inference:
 
@@ -161,7 +168,7 @@ The core of SensAi consists of **3 custom object detection models** optimized fo
 
 Each model was trained with proprietary datasets collected specifically in the AMBA urban environment, totaling approximately **2400 manually labeled images** using Label Studio.
 
-**End-to-End ML Pipeline**
+### End-to-End ML Pipeline
 
 The project covers the complete lifecycle of a production ML system:
 
@@ -171,16 +178,15 @@ The project covers the complete lifecycle of a production ML system:
 4. **Optimization**: Conversion to ONNX with integrated NMS to reduce latency
 5. **Deployment**: Integration with ONNX Runtime on Android for on-device inference
 
-**ML Value for this Use Case**
+### ML Value for this Use Case
 
 Applying Deep Learning techniques solves problems that would be impossible with traditional programming:
 
 • **Generalization**: Models detect obstacles in scenarios never seen during training
 • **Real-Time**: ~50ms inference per frame enables instant user alerts
-• **No Internet**: On-device processing ensures offline operation and availability
 • **Adaptability**: Models can be retrained with new data to improve accuracy
 
-**User Research**
+### User Research
 
 Semi-structured interviews were conducted with 7 people with varying degrees of visual impairment. Findings defined priority detections: people as the main obstacle, poorly maintained sidewalks as the second most reported problem, and the need to identify buses at busy stops.`
     },
@@ -204,9 +210,7 @@ Semi-structured interviews were conducted with 7 people with varying degrees of 
         '3 modelos YOLO personalizados entrenados con datasets propios (~2400 imágenes)',
         'Optimización de modelos para inferencia móvil con ONNX Runtime',
         'Procesamiento en tiempo real con baja latencia y funcionamiento offline',
-        'Diseño centrado en accesibilidad con soporte completo para TalkBack',
-        'Feedback multimodal: visual, auditivo (TTS) y háptico',
-        'Modos de alto contraste y tipografía Atkinson Hyperlegible',
+        'Diseño centrado en accesibilidad con soporte completo para TalkBack, modos de alto contraste y tipografía Atkinson Hyperlegible',
         'Validación con usuarios reales con discapacidad visual'
       ],
       en: [
@@ -214,9 +218,7 @@ Semi-structured interviews were conducted with 7 people with varying degrees of 
         '3 custom YOLO models trained with proprietary datasets (~2400 images)',
         'Model optimization for mobile inference with ONNX Runtime',
         'Real-time processing with low latency and offline operation',
-        'Accessibility-centered design with full TalkBack support',
-        'Multimodal feedback: visual, audio (TTS) and haptic',
-        'High contrast modes and Atkinson Hyperlegible typography',
+        'Accessibility-centered design with full TalkBack support, high contrast modes and Atkinson Hyperlegible typography',
         'Validation with real users with visual impairments'
       ]
     },
@@ -236,7 +238,9 @@ Captura del entorno desde la cámara → Redimensionamiento a 640×640 → Norma
 El modelo ONNX recibe las imágenes preprocesadas y genera predicciones numéricas. Estas se decodifican para obtener las coordenadas de las cajas delimitadoras (bounding boxes). Se aplica filtrado por nivel de confianza y el algoritmo NMS (Non-Maximum Suppression) para eliminar solapamientos.
 
 **3. Posprocesamiento**
-Los resultados se transforman a dimensiones originales y se enriquecen con contadores y alertas accesibles para el usuario mediante TTS y vibraciones.`,
+Los resultados se transforman a dimensiones originales y se enriquecen con contadores y alertas accesibles para el usuario mediante TTS y vibraciones.
+
+📐 **Ver diagrama de Arquitectura de Alto Nivel** en la sección de diagramas para una visualización completa del flujo.`,
           en: `The data flow during model usage follows three phases:
 
 **1. Preprocessing**
@@ -246,7 +250,9 @@ Environment capture from camera → Resize to 640×640 → Normalization → Ten
 The ONNX model receives preprocessed images and generates numerical predictions. These are decoded to obtain bounding box coordinates. Confidence-level filtering and NMS (Non-Maximum Suppression) algorithm are applied to eliminate overlaps.
 
 **3. Postprocessing**
-Results are transformed back to original dimensions and enriched with counters and accessible alerts for the user via TTS and vibrations.`
+Results are transformed back to original dimensions and enriched with counters and accessible alerts for the user via TTS and vibrations.
+
+📐 **See High-Level Architecture diagram** in the diagrams section for a complete flow visualization.`
         }
       },
       {
@@ -539,8 +545,12 @@ Design centered on visual impairment from the start, not as a feature added late
       en: 'Mobile social network with biometric authentication, gamification, dynamic themes and multilingual support.'
     },
     introDescription: {
-      es: `Red social móvil completa con **arquitectura de seguridad robusta**: autenticación biométrica nativa, JWT con refresh tokens, Magic Links y protección contra ataques comunes. Incluye sistema de **gamificación** con XP, niveles y logros desbloqueables. Desarrollada en 8 meses con React Native y backend Node.js/MongoDB.`,
-      en: `Complete mobile social network with **robust security architecture**: native biometric authentication, JWT with refresh tokens, Magic Links and protection against common attacks. Includes **gamification system** with XP, levels and unlockable achievements. Developed in 8 months with React Native and Node.js/MongoDB backend.`
+      es: `Red social móvil completa con **arquitectura de seguridad robusta**: autenticación biométrica nativa, JWT con refresh tokens, Magic Links y protección contra ataques comunes. Incluye sistema de **gamificación** con XP, niveles y logros desbloqueables. Desarrollada en 8 meses con React Native y backend Node.js/MongoDB.
+
+**¿Qué es Tribe?** Una red social donde podés compartir publicaciones con ubicación, dar likes, comentar, seguir usuarios y personalizar tu experiencia con temas claros/oscuros e idiomas. El sistema de gamificación te premia con XP por cada interacción, desbloqueando niveles y logros.`,
+      en: `Complete mobile social network with **robust security architecture**: native biometric authentication, JWT with refresh tokens, Magic Links and protection against common attacks. Includes **gamification system** with XP, levels and unlockable achievements. Developed in 8 months with React Native and Node.js/MongoDB backend.
+
+**What is Tribe?** A social network where you can share location-tagged posts, like, comment, follow users and customize your experience with light/dark themes and languages. The gamification system rewards you with XP for every interaction, unlocking levels and achievements.`
     },
     fullDescription: {
       es: `Tribe es una aplicación móvil tipo red social completa desarrollada con React Native, con un fuerte enfoque en seguridad. La app implementa múltiples capas de protección y mejores prácticas de la industria para garantizar la seguridad de los datos de los usuarios.
@@ -888,8 +898,12 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
       en: 'Web platform for movie discovery with personalized playlists, trailers and recommendation system.'
     },
     introDescription: {
-      es: `Plataforma web full-stack para descubrir qué ver cuando no sabés qué elegir. Integración completa con **The Movie Database API**, sistema de **playlists CRUD** con persistencia en MongoDB, y filtrado por plataformas de streaming (Netflix, Prime, Disney+). Interfaz moderna con animaciones fluidas y diseño responsive.`,
-      en: `Full-stack web platform to discover what to watch when you don't know what to choose. Full integration with **The Movie Database API**, **CRUD playlist system** with MongoDB persistence, and filtering by streaming platforms (Netflix, Prime, Disney+). Modern interface with smooth animations and responsive design.`
+      es: `Plataforma web full-stack para descubrir qué ver cuando no sabés qué elegir. Integración completa con **The Movie Database API**, sistema de **playlists CRUD** con persistencia en MongoDB, y filtrado por plataformas de streaming (Netflix, Prime, Disney+). Interfaz moderna con animaciones fluidas y diseño responsive.
+
+**¿Qué es MoodFlix?** Una web app que te ayuda a encontrar películas según tu estado de ánimo o preferencias. Podés buscar por género, año, rating, ver trailers embebidos, crear playlists personalizadas y ver en qué plataforma está disponible cada título.`,
+      en: `Full-stack web platform to discover what to watch when you don't know what to choose. Full integration with **The Movie Database API**, **CRUD playlist system** with MongoDB persistence, and filtering by streaming platforms (Netflix, Prime, Disney+). Modern interface with smooth animations and responsive design.
+
+**What is MoodFlix?** A web app that helps you find movies based on your mood or preferences. You can search by genre, year, rating, watch embedded trailers, create personalized playlists, and see which platform each title is available on.`
     },
     fullDescription: {
       es: `MoodFlix es una plataforma diseñada para ayudarte a encontrar qué ver cuando no estás seguro. Desarrollada como proyecto de la materia Aplicaciones Interactivas en UADE.
@@ -1126,64 +1140,75 @@ UI with purple/pink gradients, smooth animations, responsive design and sound no
     team: 6,
     duration: '4 meses',
     shortDescription: {
-      es: 'Módulo de marketplace para plataforma de delivery con arquitectura de microservicios e IaC.',
-      en: 'Marketplace module for delivery platform with microservices architecture and IaC.'
+      es: 'Rol DevOps: IaC con Terraform, CI/CD automatizado, configuración de entornos y flujo de trabajo Git.',
+      en: 'DevOps role: IaC with Terraform, automated CI/CD, environment setup and Git workflow.'
     },
     fullDescription: {
-      es: `Componente de Marketplace dentro de una arquitectura de microservicios para una plataforma de pedidos de comida (deliver.ar). El módulo permite a los clientes acceder a productos y promociones de múltiples comercios registrados (tenants).
+      es: `Como DevOps del módulo Marketplace me encargué de definir el stack tecnológico, configurar los entornos frontend, backend y base de datos, así como sus respectivos repositorios, despliegues y vínculos, asegurando que el equipo de desarrollo pueda desempeñar sus tareas.
 
-**Portal de Administración de Tenants (PAT)**
-Aplicación web dedicada para que los proveedores autogestionen sus catálogos:
-• CRUD completo de productos
-• Gestión de catálogos y promociones
-• Control de precios, disponibilidad y stock
-• Dashboard con métricas de desempeño
+**Configuración Inicial de Entornos**
+• Frontend: Estructura de carpetas escalable, gestión de fuentes y paletas de colores
+• Backend: Arquitectura MVC, servidor con conexión funcional a PostgreSQL
+• Modelo de datos diseñado para el caso de negocio del módulo
 
-**Aspectos técnicos destacados:**
-• APIs REST para integración con otros módulos (Cliente, Deliver, Backoffice, BI)
-• Sistema de eventos para mensajería y análisis
-• Infraestructura como Código (IaC) con Terraform
-• Arquitectura escalable y modular`,
-      en: `Marketplace component within a microservices architecture for a food ordering platform (deliver.ar). The module allows customers to access products and promotions from multiple registered businesses (tenants).
+**Infrastructure as Code (IaC) con Terraform**
+La infraestructura está completamente definida como código, permitiendo reproducibilidad, versionado y automatización del despliegue.
 
-**Tenant Administration Portal (PAT)**
-Dedicated web application for providers to self-manage their catalogs:
-• Complete product CRUD
-• Catalog and promotion management
-• Price, availability and stock control
-• Dashboard with performance metrics
+**CI/CD y Despliegues**
+• Despliegues de producción mediante Render para frontend y backend
+• Flujo CI/CD automatizado: cada push a main genera nuevo despliegue
+• Credenciales resguardadas en .env (desarrollo) y secretos de Render (producción)
 
-**Technical highlights:**
-• REST APIs for integration with other modules (Client, Deliver, Backoffice, BI)
-• Event system for messaging and analytics
-• Infrastructure as Code (IaC) with Terraform
-• Scalable and modular architecture`
+**Flujo de Trabajo Git**
+• Ramas principales: main (producción) y DQH (desarrollo)
+• Estrategia de subramas por usuario/funcionalidad
+• Protección de main mediante restricción a pull requests
+• Validación cruzada entre miembros del equipo`,
+      en: `As DevOps for the Marketplace module, I was responsible for defining the technology stack, configuring frontend, backend, and database environments, as well as their respective repositories, deployments, and connections, ensuring the development team could perform their tasks.
+
+**Initial Environment Configuration**
+• Frontend: Scalable folder structure, font and color palette management
+• Backend: MVC architecture, server with functional PostgreSQL connection
+• Data model designed for the module's business case
+
+**Infrastructure as Code (IaC) with Terraform**
+The infrastructure is fully defined as code, enabling reproducibility, versioning, and deployment automation.
+
+**CI/CD and Deployments**
+• Production deployments via Render for frontend and backend
+• Automated CI/CD flow: each push to main triggers a new deployment
+• Credentials stored in .env (development) and Render secrets (production)
+
+**Git Workflow**
+• Main branches: main (production) and DQH (development)
+• Sub-branch strategy per user/feature
+• Main branch protection via pull request restrictions
+• Cross-validation among team members`
     },
     technologies: ['Java', 'Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Terraform', 'AWS'],
     tags: ['Web', 'API', 'Cloud', 'IaC'],
     imageUrl: 'https://cdn-icons-png.flaticon.com/512/2331/2331970.png',
     imageStyle: 'contain',
-    codeUrl: 'https://github.com/juani8/marketplace-services',
     featured: false,
     category: 'cloud',
     role: {
-      es: 'Desarrollador Full-Stack & DevOps',
-      en: 'Full-Stack Developer & DevOps'
+      es: 'DevOps Engineer',
+      en: 'DevOps Engineer'
     },
     highlights: {
       es: [
-        'Arquitectura de microservicios escalable',
         'Infrastructure as Code con Terraform',
-        'APIs REST documentadas con OpenAPI',
-        'Integración con múltiples módulos del ecosistema',
-        'Portal de autogestión para tenants'
+        'Pipeline CI/CD automatizado con Render',
+        'Configuración de entornos frontend, backend y base de datos',
+        'Gestión de secretos y credenciales',
+        'Flujo de trabajo Git con ramas protegidas'
       ],
       en: [
-        'Scalable microservices architecture',
         'Infrastructure as Code with Terraform',
-        'REST APIs documented with OpenAPI',
-        'Integration with multiple ecosystem modules',
-        'Self-management portal for tenants'
+        'Automated CI/CD pipeline with Render',
+        'Frontend, backend and database environment setup',
+        'Secrets and credentials management',
+        'Git workflow with protected branches'
       ]
     },
     sections: [
@@ -1225,6 +1250,7 @@ Managed resources:
       }
     ],
     links: [
+      { label: { es: 'Frontend', en: 'Frontend' }, url: 'https://github.com/juani8/marketplace', type: 'github' },
       { label: { es: 'Backend Services', en: 'Backend Services' }, url: 'https://github.com/juani8/marketplace-services', type: 'github' },
       { label: { es: 'Infrastructure as Code', en: 'Infrastructure as Code' }, url: 'https://github.com/juani8/marketplace-infrastructure-as-code', type: 'github' }
     ]

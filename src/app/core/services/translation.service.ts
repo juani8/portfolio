@@ -37,8 +37,8 @@ export class TranslationService {
       en: 'Software Developer focused on <span class="highlight">AI</span>, <span class="highlight">Cloud</span> & <span class="highlight">Security</span>' 
     },
     'home.description': { 
-      es: 'Apasionado por crear soluciones tecnológicas innovadoras. Me especializo en <strong>desarrollo de aplicaciones</strong>, <strong>machine learning</strong> y <strong>seguridad informática</strong>, siempre buscando aprender y aplicar las mejores prácticas de la industria.',
-      en: 'Passionate about creating innovative technological solutions. I specialize in <strong>application development</strong>, <strong>machine learning</strong>, and <strong>cybersecurity</strong>, always seeking to learn and apply industry best practices.'
+      es: 'Apasionado por crear soluciones tecnológicas innovadoras.<br><br>Me especializo en <strong>desarrollo de aplicaciones</strong>, <strong>machine learning</strong> y <strong>seguridad informática</strong>, siempre buscando aprender y aplicar las mejores prácticas de la industria.',
+      en: 'Passionate about creating innovative technological solutions.<br><br>I specialize in <strong>application development</strong>, <strong>machine learning</strong>, and <strong>cybersecurity</strong>, always seeking to learn and apply industry best practices.'
     },
     'home.viewProjects': { es: 'Ver proyectos', en: 'View projects' },
     'home.contactMe': { es: 'Contáctame', en: 'Contact me' },
@@ -92,8 +92,8 @@ export class TranslationService {
     },
     'mlai.approach': { es: 'Mi enfoque', en: 'My approach' },
     'mlai.approachText': {
-      es: '<strong>Machine Learning e Inteligencia Artificial</strong> es el área en la que más foco estoy haciendo y donde más me estoy capacitando actualmente. Me apasiona desarrollar soluciones prácticas de ML, desde la recolección y preparación de datos hasta el entrenamiento y <strong>despliegue de modelos en producción</strong>. Trabajo principalmente con <strong>visión por computadora</strong> y detección de objetos, aplicando técnicas de deep learning para resolver problemas del mundo real.',
-      en: '<strong>Machine Learning and Artificial Intelligence</strong> is the area where I am most focused and where I am currently training the most. I am passionate about developing practical ML solutions, from data collection and preparation to model training and <strong>production deployment</strong>. I primarily work with <strong>computer vision</strong> and object detection, applying deep learning techniques to solve real-world problems.'
+      es: 'Es el área donde más me estoy capacitando actualmente. Me apasiona desarrollar soluciones prácticas de ML, abarcando desde la definición, diseño, entrenamiento y optimización de modelos de ML/IA, hasta la construcción de pipelines de entrenamiento y evaluación y el <strong>despliegue de modelos en producción</strong>. Trabajo principalmente con <strong>visión por computadora</strong>, aplicando técnicas de deep learning para resolver problemas del mundo real.',
+      en: 'It is the field where I am currently focusing my training the most. I am passionate about developing practical ML solutions, ranging from model definition, design, training, and optimization to the construction of training and evaluation pipelines and <strong>production deployment</strong>. I primarily work with <strong>computer vision</strong>, applying deep learning techniques to solve real-world problems.',
     },
     'mlai.pipeline': { es: 'Pipeline típico', en: 'Typical pipeline' },
     'mlai.datasets': { es: 'Datasets', en: 'Datasets' },

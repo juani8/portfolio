@@ -86,13 +86,6 @@ import { PERSONAL_INFO, getTopSkills } from '../../core/data/profile.data';
           }
         </div>
       </div>
-
-      <!-- Scroll Indicator -->
-      <div class="scroll-indicator animate-fade-in" style="animation-delay: 0.8s">
-        <div class="scroll-mouse">
-          <div class="scroll-wheel"></div>
-        </div>
-      </div>
     </section>
   `,
   styles: [`
@@ -328,42 +321,6 @@ import { PERSONAL_INFO, getTopSkills } from '../../core/data/profile.data';
       &:hover {
         border-color: var(--color-accent-primary);
         color: var(--color-accent-primary);
-      }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .scroll-mouse {
-      width: 24px;
-      height: 40px;
-      border: 2px solid var(--color-text-muted);
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      padding-top: 8px;
-    }
-
-    .scroll-wheel {
-      width: 4px;
-      height: 8px;
-      background: var(--color-accent-primary);
-      border-radius: 2px;
-      animation: scroll 2s ease infinite;
-    }
-
-    @keyframes scroll {
-      0%, 100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(8px);
-        opacity: 0.5;
       }
     }
 
