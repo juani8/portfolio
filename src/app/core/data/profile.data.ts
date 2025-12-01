@@ -131,12 +131,12 @@ export const EXPERIENCES: Experience[] = [
       en: 'Information Security Intern'
     },
     description: {
-      es: 'Enfocado en tareas de <strong>cumplimiento y gobierno</strong>, colaborando en auditorías internas y externas, procesos de certificación como <strong>PCI-DSS</strong>, y la definición de controles, matrices de roles y políticas basadas en Active Directory. Adquirí una visión sólida de controles y estándares, interactuando con equipos técnicos para evaluación de evidencias, <strong>hardening</strong> y vulnerabilidades.',
+      es: 'Enfocado en tareas de <strong>cumplimiento y gobierno</strong>, colaborando en auditorías internas y externas, procesos de certificación como <strong>PCI-DSS</strong>, y la definición de controles, matrices de roles y políticas basadas en Active Directory. Adquirí una visión sólida de controles y estándares, interactuando con equipos técnicos para evaluación de evidencias, <strong>hardening y vulnerabilidades</strong>.',
       en: 'Focused on <strong>compliance and governance</strong> tasks, collaborating on internal and external audits, certification processes such as <strong>PCI-DSS</strong>, and the definition of controls, role matrices, and policies based on Active Directory. Built a solid understanding of security controls and industry standards, engaging with technical teams on evidence evaluation, <strong>hardening</strong> activities, and vulnerability assessments.'
     },
     startDate: '2023-05',
     endDate: '2024-11',
-    technologies: ['Faraday', 'PCI-DSS', 'OWASP', 'Risk Analysis'],
+    technologies: ['Faraday', 'PCI-DSS', 'OWASP', 'Active Directory'],
     type: 'work'
   },
   {
