@@ -564,7 +564,7 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
     tags: ['Mobile', 'API', 'Security'],
     imageUrl: 'assets/images/projects/tribe_logo.webp',
     imageStyle: 'contain',
-    codeUrl: 'https://github.com/mrosariopresedo/Tribe',
+    codeUrl: 'https://github.com/juani8/tribe',
     featured: false,
     category: 'main',
     role: {
@@ -856,7 +856,7 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
       }
     ],
     links: [
-      { label: { es: 'API Docs (Swagger)', en: 'API Docs (Swagger)' }, url: 'https://github.com/mrosariopresedo/Tribe/blob/main/TribeBackend/docs/swagger.yaml', type: 'docs' }
+      { label: { es: 'API Docs (Swagger)', en: 'API Docs (Swagger)' }, url: 'https://github.com/juani8/tribe/blob/main/TribeBackend/docs/swagger.yaml', type: 'docs' }
     ]
   },
 

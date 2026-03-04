@@ -545,12 +545,12 @@ Design centered on visual impairment from the start, not as a feature added late
       en: 'Mobile social network with biometric authentication, gamification, dynamic themes and multilingual support.'
     },
     introDescription: {
-      es: `Red social móvil completa con **arquitectura de seguridad robusta**: autenticación biométrica nativa, JWT con refresh tokens, Magic Links y protección contra ataques comunes. Incluye sistema de **gamificación** con XP, niveles y logros desbloqueables. Desarrollada en 8 meses con React Native y backend Node.js/MongoDB.
+      es: `Red social móvil completa con **arquitectura de seguridad enterprise-grade**: autenticación biométrica nativa, JWT con refresh tokens, Magic Links y protección contra ataques comunes. Incluye **pipeline de seguridad DevSecOps** automatizado en CI/CD con SAST (Semgrep), DAST (OWASP ZAP), escaneo de secretos (Gitleaks), análisis de dependencias (Trivy/SCA) y pruebas de API de seguridad (OWASP Top 10). También cuenta con sistema de **gamificación** con XP, niveles y logros. Desarrollada en 8 meses con React Native, Node.js/MongoDB y arquitectura de seguridad en profundidad.
 
-**¿Qué es Tribe?** Una red social donde podés compartir publicaciones con ubicación, dar likes, comentar, seguir usuarios y personalizar tu experiencia con temas claros/oscuros e idiomas. El sistema de gamificación te premia con XP por cada interacción, desbloqueando niveles y logros.`,
-      en: `Complete mobile social network with **robust security architecture**: native biometric authentication, JWT with refresh tokens, Magic Links and protection against common attacks. Includes **gamification system** with XP, levels and unlockable achievements. Developed in 8 months with React Native and Node.js/MongoDB backend.
+**¿Qué es Tribe?** Una red social donde podés compartir publicaciones con ubicación, dar likes, comentar, seguir usuarios y personalizar tu experiencia con temas claros/oscuros e idiomas. 100% de confiabilidad garantizada mediante pruebas de seguridad automatizadas en cada cambio de código.`,
+      en: `Complete mobile social network with **enterprise-grade security architecture**: native biometric authentication, JWT with refresh tokens, Magic Links and protection against common attacks. Includes **automated DevSecOps security pipeline** in CI/CD with SAST (Semgrep), DAST (OWASP ZAP), secret scanning (Gitleaks), dependency analysis (Trivy/SCA) and API security tests (OWASP Top 10). Also features **gamification system** with XP, levels and unlockable achievements. Developed in 8 months with React Native, Node.js/MongoDB and defense-in-depth security architecture.
 
-**What is Tribe?** A social network where you can share location-tagged posts, like, comment, follow users and customize your experience with light/dark themes and languages. The gamification system rewards you with XP for every interaction, unlocking levels and achievements.`
+**What is Tribe?** A social network where you can share location-tagged posts, like, comment, follow users and customize your experience with light/dark themes and languages. 100% reliability guaranteed through automated security testing on every code change.`
     },
     fullDescription: {
       es: `Tribe es una aplicación móvil tipo red social completa desarrollada con React Native, con un fuerte enfoque en seguridad. La app implementa múltiples capas de protección y mejores prácticas de la industria para garantizar la seguridad de los datos de los usuarios.
@@ -590,7 +590,7 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
     tags: ['Mobile', 'API', 'Security'],
     imageUrl: 'assets/images/projects/tribe_logo.webp',
     imageStyle: 'contain',
-    codeUrl: 'https://github.com/mrosariopresedo/Tribe',
+    codeUrl: 'https://github.com/juani8/tribe',
     featured: false,
     category: 'main',
     role: {
@@ -710,6 +710,136 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
 - MongoDB with Mongoose for data modeling
 - Separated controllers: auth, users, posts, gamification
 - Data validation with express-validator`
+        }
+      },
+      {
+        title: {
+          es: 'Pipeline de Seguridad DevSecOps',
+          en: 'DevSecOps Security Pipeline'
+        },
+        content: {
+          es: `Tribe implementa un **pipeline de seguridad automatizado** en GitHub Actions que ejecuta controles de seguridad en cada push y pull request, siguiendo el modelo **Shift-Left**: llevar la seguridad lo más temprano posible al desarrollo.
+
+**Componentes del Pipeline**
+
+🔑 **Secret Scanning (Gitleaks)**
+Detecta tokens, API keys, contraseñas y secretos hardcodeados. Bloquea el merge si encuentra secretos comprometidos.
+
+🛡️ **SAST - Static Application Security Testing (Semgrep)**
+Analiza el código fuente buscando vulnerabilidades OWASP Top 10: injection, XSS, insecure deserialization, hardcoded secrets, uso de funciones inseguras. Genera reportes SARIF integrados en GitHub Code Scanning.
+
+⚡ **DAST - Dynamic Application Security Testing (OWASP ZAP)**
+Ataca la aplicación en runtime en ambiente efímero: detecta headers faltantes, XSS reflected, problemas de autenticación, CORS mal configurado. No bloquea el merge pero genera alertas.
+
+📦 **SCA - Software Composition Analysis (Trivy/npm audit)**
+Escanea dependencias en busca de CVEs conocidas en backend (Node.js) y frontend (React). Detecta componentes vulnerables y sugiere actualizaciones.
+
+🧪 **API Security Tests (Postman/Newman)**
+12 pruebas específicas de OWASP: NoSQL injection, JWT tampering, path traversal, CORS bypass, rate limiting, DoS protection.
+
+🐳 **Container Security**
+- Hadolint: valida Dockerfile por best practices (non-root, pinned versions)
+- Trivy: escanea imagen Docker final en busca de CVEs
+
+📜 **Compliance & Inventario**
+- CycloneDX SBOM: genera Software Bill of Materials (requerido por NIST)
+- License Compliance: detecta licencias restrictivas (GPL/AGPL)
+
+**Quality Gate Automatizado**
+El merge a main está bloqueado si SAST o Secret Scan encuentran issues críticos. Esto garantiza que código inseguro nunca llega a producción.`,
+          en: `Tribe implements an **automated security pipeline** in GitHub Actions that runs security controls on every push and pull request, following the **Shift-Left** model: bringing security as early as possible in development.
+
+**Pipeline Components**
+
+🔑 **Secret Scanning (Gitleaks)**
+Detects hardcoded tokens, API keys, passwords and secrets. Blocks merge if compromised secrets are found.
+
+🛡️ **SAST - Static Application Security Testing (Semgrep)**
+Analyzes source code for OWASP Top 10 vulnerabilities: injection, XSS, insecure deserialization, hardcoded secrets, unsafe functions. Generates SARIF reports integrated in GitHub Code Scanning.
+
+⚡ **DAST - Dynamic Application Security Testing (OWASP ZAP)**
+Attacks the running application in ephemeral environment: detects missing headers, reflected XSS, authentication flaws, misconfigured CORS. Doesn't block merge but generates alerts.
+
+📦 **SCA - Software Composition Analysis (Trivy/npm audit)**
+Scans dependencies for known CVEs in backend (Node.js) and frontend (React). Detects vulnerable components and suggests updates.
+
+🧪 **API Security Tests (Postman/Newman)**
+12 OWASP-specific tests: NoSQL injection, JWT tampering, path traversal, CORS bypass, rate limiting, DoS protection.
+
+🐳 **Container Security**
+- Hadolint: validates Dockerfile against best practices (non-root, pinned versions)
+- Trivy: scans final Docker image for CVEs
+
+📜 **Compliance & Inventory**
+- CycloneDX SBOM: generates Software Bill of Materials (required by NIST)
+- License Compliance: detects restrictive licenses (GPL/AGPL)
+
+**Automated Quality Gate**
+Merge to main is blocked if SAST or Secret Scan find critical issues. This ensures insecure code never reaches production.`
+        }
+      },
+      {
+        title: {
+          es: 'Pruebas de Seguridad de API',
+          en: 'API Security Testing'
+        },
+        content: {
+          es: `El proyecto incluye **suite de pruebas de seguridad de API** basada en OWASP, ejecutada automáticamente en el pipeline de CI/CD. Cubre los vectores de ataque más comunes:
+
+**Inyección de Datos**
+- NoSQL Injection: intentos de manipular queries MongoDB
+- SQL Injection: aunque usamos NoSQL, validamos contra patrones comunes
+- Command Injection: ejecución de comandos del sistema
+
+**Manipulación de Autenticación**
+- JWT Tampering: modificación de tokens sin invalidar firma
+- Token Expiration: acceso con tokens expirados
+- Missing Authentication: endpoints sin protección
+
+**Autorización y Control de Acceso**
+- Broken Object-Level Authorization (BOLA): acceder a recursos de otros usuarios
+- Path Traversal: navegación a directorios no autorizados
+- Privilege Escalation: elevar permisos sin autorización
+
+**Problemas de Configuración**
+- Missing Security Headers: X-Content-Type-Options, CSP, HSTS
+- CORS Misconfiguration: acceso desde dominios no autorizados
+- Server Information Disclosure: exposición de versiones/stack traces
+
+**Resiliencia**
+- Rate Limiting: protección contra ataques de fuerza bruta
+- DoS Prevention: límites de payload y timeout
+- Connection Pooling: evitar agotamiento de conexiones
+
+Todas las pruebas se ejecutan contra una instancia efímera del backend durante el pipeline, asegurando que cada versión cumple estándares de seguridad antes de hacer merge.`,
+          en: `The project includes an **OWASP-based API security test suite**, automatically executed in the CI/CD pipeline. Covers the most common attack vectors:
+
+**Data Injection**
+- NoSQL Injection: attempts to manipulate MongoDB queries
+- SQL Injection: even with NoSQL, we validate against common patterns
+- Command Injection: system command execution
+
+**Authentication Tampering**
+- JWT Tampering: token modification without invalidating signature
+- Token Expiration: access with expired tokens
+- Missing Authentication: unprotected endpoints
+
+**Authorization & Access Control**
+- Broken Object-Level Authorization (BOLA): accessing other users' resources
+- Path Traversal: navigation to unauthorized directories
+- Privilege Escalation: elevating permissions without authorization
+
+**Configuration Issues**
+- Missing Security Headers: X-Content-Type-Options, CSP, HSTS
+- CORS Misconfiguration: access from unauthorized domains
+- Server Information Disclosure: exposure of versions/stack traces
+
+**Resilience**
+- Rate Limiting: protection against brute force attacks
+- DoS Prevention: payload limits and timeouts
+- Connection Pooling: prevent connection exhaustion
+
+All tests run against an ephemeral backend instance during the pipeline, ensuring each version meets security standards before merging.`
         }
       }
     ],
@@ -882,7 +1012,9 @@ Feed with geolocated posts, likes/favorites system, comments, user search, socia
       }
     ],
     links: [
-      { label: { es: 'API Docs (Swagger)', en: 'API Docs (Swagger)' }, url: 'https://github.com/mrosariopresedo/Tribe/blob/main/TribeBackend/docs/swagger.yaml', type: 'docs' }
+      { label: { es: 'API Docs (Swagger)', en: 'API Docs (Swagger)' }, url: 'https://github.com/juani8/tribe/blob/main/TribeBackend/docs/swagger.yaml', type: 'docs' },
+      { label: { es: 'Security Portfolio', en: 'Security Portfolio' }, url: 'https://github.com/juani8/tribe/blob/main/SECURITY_PORTFOLIO.md', type: 'docs' },
+      { label: { es: 'API Security Tests', en: 'API Security Tests' }, url: 'https://github.com/juani8/tribe/blob/main/tests/security/api-security-tests.postman.json', type: 'docs' }
     ]
   },
 
